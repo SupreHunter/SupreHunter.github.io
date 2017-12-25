@@ -22,7 +22,7 @@
 
 
 
-  <meta name="keywords" content="随笔," />
+  <meta name="keywords" content="homebrew,mac," />
 
 
 
@@ -55,7 +55,7 @@
 
 
 
-  <title> 时光流逝，不知何时 // Hunter's site </title>
+  <title> MAC下Homebrew的安装及简介 // Hunter's site </title>
 </head>
 
 <body>
@@ -175,7 +175,7 @@
           
           
             
-              时光流逝，不知何时
+              MAC下Homebrew的安装及简介
             
           
         </h1>
@@ -183,14 +183,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2017-11-20
+          发表于 2017-12-25
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分类于
             
-              <a href="/categories/随笔散文/">随笔散文</a>
+              <a href="/categories/技术分享/">技术分享</a>
 
               
               
@@ -211,10 +211,65 @@
       
 
       
-        <p></p><p>&emsp;&emsp;人生到了这个尴尬的路口，喜闻乐见地开始了多愁善感，即入而立之年，可是状态和心态却完全没有跟上时光的荏苒…工作再一次从“实习生”起步，感觉处处相难，依旧没有多么澎湃的信心，把自己慢慢跌入中年危机的深潭。</p><br><a id="more"></a><p></p>
-<p></p><p>&emsp;&emsp;恐怕心已不再年轻,让我对梦想的渴望止步于此，感觉只有生活的压力和对现状的不满催动着我为之最后一搏！</p><p></p>
-<p></p><p>&emsp;&emsp;兜兜转转，回归如初，身边多了一个如此疼爱的人，不枉之前的蹉跎，拾之我运。亦不能负如此温情的寄托，实属我命。只有在这个充满了不解的社会里继续辗转，尽量坚持我所坚持的一切，希望我身边的人能依旧天真、幸福。</p><br><img src="http://hexo-1255506658.coscd.myqcloud.com/%E6%96%87%E7%AB%A0%E8%B4%B4%E5%9B%BE/pig.jpeg" width="200px" height="200px"><p></p>
+        <p>&emsp;&emsp;什么是Homebrew呢？官方给出了非常清楚的解释：Homebrew是一个包管理器，用于在Mac上安装一些OS X没有的UNIX工具（比如著名的wget）。</p>
+<p>&emsp;&emsp;Homebrew将这些工具统统安装到了 /usr/local/Cellar 目录中，并在 /usr/local/bin 中创建符号链接。</p>
+<a id="more"></a>
+<h2 id="Homebrew的官方网站"><a href="#Homebrew的官方网站" class="headerlink" title="Homebrew的官方网站"></a>Homebrew的官方网站</h2><p><a href="http://mxcl.github.com/homebrew/" target="_blank" rel="noopener">http://mxcl.github.com/homebrew/</a></p>
+<h2 id="Homebrew的安装"><a href="#Homebrew的安装" class="headerlink" title="Homebrew的安装"></a>Homebrew的安装</h2><p>Homebrew是基于Ruby的，所以安装过程也是很简单的，只要你的电脑安装了Xcode，就会自带Ruby，把下面的代码粘贴到Terminal中执行即可。</p>
+<pre><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre><p>接着按“Enter”，输入密码，稍等片刻即将安装好Homebrew，安装成功后，会自动创建目录 /usr/local/Cellar 来存放Homebrew安装的程序。 </p>
+<p>这时你就可以直接在命令行状态下面使用 brew 命令了。</p>
+<p>通过 brew install就可以安装软件了,通过 brew search 就可以搜索程序，例如 brew search vim ,就可以搜索名称包括vim的程序,</p>
+<p>通过 brew update 就可以把包信息更新到最新，不过包更新是通过Git命令，所以要先通过 brew install git 命令安装git。</p>
+<pre><code>brew install git
+</code></pre><h2 id="Homebrew的一些命令"><a href="#Homebrew的一些命令" class="headerlink" title="Homebrew的一些命令"></a>Homebrew的一些命令</h2><pre><code>//查看brew的帮助
+brew –help
 
+//安装软件
+brew install git
+
+//卸载软件
+brew uninstall git
+
+//搜索软件
+brew search git
+
+//显示已经安装软件列表
+brew list
+
+//更新软件，把所有的Formula目录更新，并且会对本机已经安装并有更新的软件用*标明。
+brew update
+
+//更新某具体软件
+brew upgrade git
+
+//查看软件信息
+brew [info | home] [FORMULA...]
+
+//删除程序，和upgrade一样，单个软件删除和所有程序老版删除。
+brew cleanup git 
+brew cleanup
+
+//查看那些已安装的程序需要更新
+brew outdated
+
+
+//其它Homebrew指令:
+brew list   //—列出已安装的软件
+
+brew update   //—更新Homebrew
+
+brew home *   //—用浏览器打开
+
+brew info *   //—显示软件内容信息
+
+brew deps *    //—显示包依赖
+
+brew server *  //—启动web服务器，可以通过浏览器访问
+                 //http://localhost:4567/ 来同网页来管理包
+
+brew -h brew   //—帮助
+</code></pre>
       
     </div>
 
@@ -222,7 +277,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/随笔/"> #随笔 </a>
+            <a href="/tags/homebrew/"> #homebrew </a>
+          
+            <a href="/tags/mac/"> #mac </a>
           
         </div>
       
@@ -231,11 +288,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/25/MAC下Homebrew的安装及简介/">MAC下Homebrew的安装及简介</a>
+              <a href="/2017/12/25/时光流逝，不知何时的副本/">MAC下配置apache、php、mysql开发环境</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/20/时光流逝，不知何时/">时光流逝，不知何时</a>
             
           </div>
         </div>
@@ -341,7 +400,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Homebrew的官方网站"><span class="nav-number">1.</span> <span class="nav-text">Homebrew的官方网站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Homebrew的安装"><span class="nav-number">2.</span> <span class="nav-text">Homebrew的安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Homebrew的一些命令"><span class="nav-number">3.</span> <span class="nav-text">Homebrew的一些命令</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

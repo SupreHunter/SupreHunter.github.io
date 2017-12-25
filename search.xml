@@ -1,9 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[MAC下配置apache、php、mysql开发环境]]></title>
+    <url>%2F2017%2F12%2F25%2F%E6%97%B6%E5%85%89%E6%B5%81%E9%80%9D%EF%BC%8C%E4%B8%8D%E7%9F%A5%E4%BD%95%E6%97%B6%E7%9A%84%E5%89%AF%E6%9C%AC%2F</url>
+    <content type="text"><![CDATA[&emsp;&emsp;MAC系统对于开发者来说一直都是一个非常友好的环境，搭建php的环境更是方便快捷，只需很简单的配置便可以开始使用。 Apache在MAC系统中已经安装好了Apache服务，输入如下命令可以查看当前MAC的版本： apachectl -v 可以看到如下版本信息： Server version: Apache/2.4.28 (Unix) Server built: Oct 9 2017 19:54:20 启动、停止、重启apache： sudo apachectl start sudu apachectl stop sudo apachectl restart 需要输入当前MAC的密码，如果启动apache后，可以在浏览器输入如下网址： http://localhost http://127.0.0.1 如果页面显示 It works! ，祝贺你，apache已经启动成功了。apache默认安装的一个隐藏目录中，你可以在控制台输入 open /etc 找到apache的目录，也可以在Finder -&gt; 前往 -&gt; 前往文件夹中输入/etc即可，找到apache文件夹。在里面有很多的配置文件，例如 httpd.conf 等，修改这些文件，可以改变很多apache的配置，包括默认的部署路径等，但本人建议不要修改（搞了很久还是出错），如果怕每次打开默认路径麻烦，我会给你一个applescript脚本文件，直接可以打开目录。如果你还是想修改，可以借鉴一下其他人的方法，但你一定要备份原来的 httpd.conf ，不然…你懂的，我现在把一个原版2.4.28的httpd.conf下载链接给你们，以防万一啊。 链接:https://pan.baidu.com/s/1o8Jwxjc 密码:o9ti 那么刚才那个 It works! 的页面放在哪里呢，在apache的默认部署路径里： /Library/WebServer/Documents/ 你也可以通过上述两个方法进入该目录，我们以后的项目也就可以放在这个路径下了，下面我提供一个快速打开这个文件夹的脚本文件： 链接:https://pan.baidu.com/s/1geShWcz 密码:9sl6 至此，apache服务器就好了，是不是很简单啊 PHPphp也是MAC系统自带的，这给我们省去了很多麻烦，直接输入命令： php -v 可以看到当前php的版本： PHP 7.1.7 (cli) (built: Jul 15 2017 18:08:09) ( NTS ) Copyright (c) 1997-2017 The PHP Group Zend Engine v3.1.0, Copyright (c) 1998-2017 Zend Technologies 首先，找到上文提到的apache安装目录下的 httpd.conf ，找到 #LoadModule php7_module libexec/apache2/libphp7.so 将最开头的#删除，保存配置。（如果因为权限无法保存，就拖到桌面，保存完在拖回文件夹覆盖），最后我们在部署文件夹（/Library/WebServer/Documents/）内新建一个info.php的文件，输入 &lt;?php phpinfo(); ?&gt; 保存后，重启apache服务器，在浏览器里输入： http://localhost/info.php 如果能看到页面上显示的PHP信息就说明OK了！ MySqlMAC下Mysql是需要安装的，安装的方法很多，建议直接去官网 http://dev.mysql.com/downloads/mysql/ 下载，找到自己电脑相对应的版本，下载并安装。（会弹出一个对话框，上面有初始密码，请记住，方便后面更改，因为这个初始密码很难记住）输入如下命令： mysql --version 可以看到当前mysql的版本信息： mysql Ver 14.14 Distrib 5.7.20, for macos10.12 (x86_64) using EditLine wrapper 如果提示command not found,这是因为该命令默认访问/usr/local/bin/mysql路径下的mysql,所以我们可以在终端输入如下命令： sudo ln -fs /usr/local/mysql/bin/mysql /usr/local/bin/mysql 接着,使用安装MySQL时给出的用户和密码登录MySQL服务,在终端中输入如下命令，键入回车后输入mysql密码： mysql -u root -p 接着进入到了mysql的命令行，键入命令退出mysql服务。 exit 最后，在终端中更改mysql密码： /usr/local/mysql/bin/mysqladmin -u root -p password 新密码 注：root为默认用户，将新密码改成自己的密码后，键入回车输入原密码即可。回报一个warring，没关系，直接忽视。 在命令行输入如下指令,启动与停止MySQL服务： sudo /usr/local/mysql/support-files/mysql.server start sudo /usr/local/mysql/support-files/mysql.server stop 也可以在系统偏好设置中点击MySql来启动和停止mysql服务。 MySQL可视化管理mysql在MAC下有很多可视化管理软件，在这里，我推荐使用phpMyAdmin，首先去官网下载： https://www.phpmyadmin.net/downloads/ 下载后，将文件解压到apache的默认部署路径（/Library/WebServer/Documents/）下，并改名为 phpMyAdmin ，将文件夹中的 config.sample.inc.php 文件重命名为 config.inc.php，打开文件，修改代码： // 修改前: $cfg[&apos;Servers&apos;][$i][&apos;host&apos;] = &apos;localhost&apos;; // 修改后: $cfg[&apos;Servers&apos;][$i][&apos;host&apos;] = &apos;127.0.0.1&apos;; 最后,在浏览器中输入如下网址进行登录即可直接对MySQL进行可视化管理： http://localhost/phpmyadmin/ 注：用户为 root ，密码为修改后的密码。 至此，php的初步开发环境就搭建成功了，祝你在php的道路上越走越远！]]></content>
+      <categories>
+        <category>技术分享</category>
+      </categories>
+      <tags>
+        <tag>mac</tag>
+        <tag>apache</tag>
+        <tag>php</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MAC下Homebrew的安装及简介]]></title>
+    <url>%2F2017%2F12%2F25%2FMAC%E4%B8%8BHomebrew%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AE%80%E4%BB%8B%2F</url>
+    <content type="text"><![CDATA[&emsp;&emsp;什么是Homebrew呢？官方给出了非常清楚的解释：Homebrew是一个包管理器，用于在Mac上安装一些OS X没有的UNIX工具（比如著名的wget）。 &emsp;&emsp;Homebrew将这些工具统统安装到了 /usr/local/Cellar 目录中，并在 /usr/local/bin 中创建符号链接。 Homebrew的官方网站http://mxcl.github.com/homebrew/ Homebrew的安装Homebrew是基于Ruby的，所以安装过程也是很简单的，只要你的电脑安装了Xcode，就会自带Ruby，把下面的代码粘贴到Terminal中执行即可。 /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot; 接着按“Enter”，输入密码，稍等片刻即将安装好Homebrew，安装成功后，会自动创建目录 /usr/local/Cellar 来存放Homebrew安装的程序。 这时你就可以直接在命令行状态下面使用 brew 命令了。 通过 brew install就可以安装软件了,通过 brew search 就可以搜索程序，例如 brew search vim ,就可以搜索名称包括vim的程序, 通过 brew update 就可以把包信息更新到最新，不过包更新是通过Git命令，所以要先通过 brew install git 命令安装git。 brew install git Homebrew的一些命令//查看brew的帮助 brew –help //安装软件 brew install git //卸载软件 brew uninstall git //搜索软件 brew search git //显示已经安装软件列表 brew list //更新软件，把所有的Formula目录更新，并且会对本机已经安装并有更新的软件用*标明。 brew update //更新某具体软件 brew upgrade git //查看软件信息 brew [info | home] [FORMULA...] //删除程序，和upgrade一样，单个软件删除和所有程序老版删除。 brew cleanup git brew cleanup //查看那些已安装的程序需要更新 brew outdated //其它Homebrew指令: brew list //—列出已安装的软件 brew update //—更新Homebrew brew home * //—用浏览器打开 brew info * //—显示软件内容信息 brew deps * //—显示包依赖 brew server * //—启动web服务器，可以通过浏览器访问 //http://localhost:4567/ 来同网页来管理包 brew -h brew //—帮助]]></content>
+      <categories>
+        <category>技术分享</category>
+      </categories>
+      <tags>
+        <tag>homebrew</tag>
+        <tag>mac</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[时光流逝，不知何时]]></title>
     <url>%2F2017%2F11%2F20%2F%E6%97%B6%E5%85%89%E6%B5%81%E9%80%9D%EF%BC%8C%E4%B8%8D%E7%9F%A5%E4%BD%95%E6%97%B6%2F</url>
-    <content type="text"><![CDATA[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人生到了这个尴尬的路口，喜闻乐见地开始了多愁善感，即入而立之年，可是状态和心态却完全没有跟上时光的荏苒…工作再一次从“实习生”起步，感觉处处相难，依旧没有多么澎湃的信心，把自己慢慢跌入中年危机的深潭。 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;恐怕心已不再年轻,让我对梦想的渴望止步于此，感觉只有生活的压力和对现状的不满催动着我为之最后一搏！ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;兜兜转转，回归如初，身边多了一个如此疼爱的人，不枉之前的蹉跎，拾之我运。亦不能负如此温情的寄托，实属我命。只有在这个充满了不解的社会里继续辗转，尽量坚持我所坚持的一切，希望我身边的人能依旧天真、幸福。]]></content>
+    <content type="text"><![CDATA[&emsp;&emsp;人生到了这个尴尬的路口，喜闻乐见地开始了多愁善感，即入而立之年，可是状态和心态却完全没有跟上时光的荏苒…工作再一次从“实习生”起步，感觉处处相难，依旧没有多么澎湃的信心，把自己慢慢跌入中年危机的深潭。 &emsp;&emsp;恐怕心已不再年轻,让我对梦想的渴望止步于此，感觉只有生活的压力和对现状的不满催动着我为之最后一搏！ &emsp;&emsp;兜兜转转，回归如初，身边多了一个如此疼爱的人，不枉之前的蹉跎，拾之我运。亦不能负如此温情的寄托，实属我命。只有在这个充满了不解的社会里继续辗转，尽量坚持我所坚持的一切，希望我身边的人能依旧天真、幸福。]]></content>
       <categories>
         <category>随笔散文</category>
       </categories>
