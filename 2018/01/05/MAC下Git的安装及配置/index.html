@@ -22,7 +22,7 @@
 
 
 
-  <meta name="keywords" content="随笔," />
+  <meta name="keywords" content="mac,git," />
 
 
 
@@ -55,7 +55,7 @@
 
 
 
-  <title> 时光流逝，不知何时 // Hunter's site </title>
+  <title> MAC下Git的安装及配置 // Hunter's site </title>
 </head>
 
 <body>
@@ -175,7 +175,7 @@
           
           
             
-              时光流逝，不知何时
+              MAC下Git的安装及配置
             
           
         </h1>
@@ -183,14 +183,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2017-11-20
+          发表于 2018-01-05
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分类于
             
-              <a href="/categories/随笔散文/">随笔散文</a>
+              <a href="/categories/技术分享/">技术分享</a>
 
               
               
@@ -211,9 +211,26 @@
       
 
       
-        <p></p><p>&emsp;&emsp;人生到了这个尴尬的路口，喜闻乐见地开始了多愁善感，即入而立之年，可是状态和心态却完全没有跟上时光的荏苒…工作再一次从“实习生”起步，感觉处处相难，依旧没有多么澎湃的信心，把自己慢慢跌入中年危机的深潭。</p><br><a id="more"></a><p></p>
-<p></p><p>&emsp;&emsp;恐怕心已不再年轻,让我对梦想的渴望止步于此，感觉只有生活的压力和对现状的不满催动着我为之最后一搏！</p><p></p>
-<p></p><p>&emsp;&emsp;兜兜转转，回归如初，身边多了一个如此疼爱的人，不枉之前的蹉跎，拾之我运。亦不能负如此温情的寄托，实属我命。只有在这个充满了不解的社会里继续辗转，尽量坚持我所坚持的一切，希望我身边的人能依旧天真、幸福。</p><br><img src="http://hexo-1255506658.coscd.myqcloud.com/%E6%96%87%E7%AB%A0%E8%B4%B4%E5%9B%BE/pig.jpeg" width="200px" height="200px"><p></p>
+        <p>&emsp;&emsp;Git是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。分布式相比于集中式的最大区别在于开发者可以提交到本地，每个开发者通过克隆（git clone），在本地机器上拷贝一个完整的Git仓库。</p>
+<p><a href="https://git-scm.com" target="_blank" rel="noopener">Git官网</a></p>
+<a id="more"></a>
+<h2 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h2><p>最早Git是在Linux上开发的，很长一段时间内，Git也只能在Linux和Unix系统上跑。不过，慢慢地有人把它移植到了Windows上。现在，Git可以在Linux、Unix、Mac和Windows这几大平台上正常运行了。</p>
+<p>方法一：可以去官网下载对应系统的版本，<a href="https://git-scm.com/download" target="_blank" rel="noopener">Git官网下载</a></p>
+<p>方法二：通过homebrew指令下载，不过首先需要安装homebrew，<a href="https://suprehunter.github.io/2017/12/25/MAC下Homebrew的安装及简介/" target="_blank" rel="noopener">传送门：MAC下Homebrew的安装及简介</a>，安装完成后用下列指令安装Git：</p>
+<pre><code>brew install git
+</code></pre><p>方法三：简单许多，在MAC下只要安装了XCode，就会自动集成Git，不过没有安装，你需要运行Xcode，选择菜单“Xcode”-&gt;“Preferences”，在弹出窗口中找到“Downloads”，选择“Command Line Tools”，点“Install”就可以完成安装了。</p>
+<p>安装完成后，可以运行指令查看Git的版本：</p>
+<pre><code>git --version
+</code></pre><p>可以看到如下结果：</p>
+<pre><code>git version 2.14.3 (Apple Git-98)
+</code></pre><h2 id="配置Git的用户名和邮箱"><a href="#配置Git的用户名和邮箱" class="headerlink" title="配置Git的用户名和邮箱"></a>配置Git的用户名和邮箱</h2><p>当安装好Git后，我们需要一个Github的用户名和邮箱，注册的事就不再赘述了。<a href="https://github.com" target="_blank" rel="noopener">Github官网</a>，注册好后，记住你的用户名和邮箱，输入如下指令：</p>
+<pre><code>git config --global user.name &quot;your_name&quot;  
+git config --global user.email &quot;your_email&quot;
+</code></pre><p>配置信息可以更改，想要更改的话就再输入上面的指令就可以了，如果想查询当前的配置信息，可以输入如下指令：</p>
+<pre><code>git config --list
+</code></pre><p>Git默认是大小写不敏感的，也就是说，将一个文件名某个字母做了大小写转换的修改Git是忽略这个改动的，导致在同步代码时候会出现错误，所以建议大小把Git设置成大小写敏感。输入如下代码即可：</p>
+<pre><code>git config core.ignorecase false
+</code></pre><h2 id="使用GitHub-Desktop来将项目托管到GitHub"><a href="#使用GitHub-Desktop来将项目托管到GitHub" class="headerlink" title="使用GitHub Desktop来将项目托管到GitHub"></a>使用GitHub Desktop来将项目托管到GitHub</h2><p>在MAC上我们可以很方便地通过GitHub Desktop来操作github，首先登陆官网下载安装 <a href="http://note.youdao.com/" target="_blank" rel="noopener">GitHub Desktop官网</a>，安装完成后就需要配置一下GitHub Desktop，网上的相关教程很多，我现在给大家贴一个不错的传送门 <a href="http://blog.csdn.net/baimafujinji/article/details/74533992" target="_blank" rel="noopener">在MAC中使用Github超详细攻略</a>，里面还有相关github的注册攻略，大家可以参照这个攻略，就可以完成在MAC下操作github来实现软件分布式版本管理了。</p>
 
       
     </div>
@@ -222,7 +239,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/随笔/"> #随笔 </a>
+            <a href="/tags/mac/"> #mac </a>
+          
+            <a href="/tags/git/"> #git </a>
           
         </div>
       
@@ -231,11 +250,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/25/MAC下Homebrew的安装及简介/">MAC下Homebrew的安装及简介</a>
+              <a href="/2018/01/05/MAC搭建Node.js开发环境/">MAC搭建Node.js开发环境</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/25/MAC下配置apache、php、mysql开发环境/">MAC下配置apache、php、mysql开发环境</a>
             
           </div>
         </div>
@@ -341,7 +362,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Git"><span class="nav-number">1.</span> <span class="nav-text">安装Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Git的用户名和邮箱"><span class="nav-number">2.</span> <span class="nav-text">配置Git的用户名和邮箱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用GitHub-Desktop来将项目托管到GitHub"><span class="nav-number">3.</span> <span class="nav-text">使用GitHub Desktop来将项目托管到GitHub</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

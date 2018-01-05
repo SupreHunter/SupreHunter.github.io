@@ -22,7 +22,7 @@
 
 
 
-  <meta name="keywords" content="随笔," />
+  <meta name="keywords" content="mac,node.js," />
 
 
 
@@ -55,7 +55,7 @@
 
 
 
-  <title> 时光流逝，不知何时 // Hunter's site </title>
+  <title> MAC搭建Node.js开发环境 // Hunter's site </title>
 </head>
 
 <body>
@@ -175,7 +175,7 @@
           
           
             
-              时光流逝，不知何时
+              MAC搭建Node.js开发环境
             
           
         </h1>
@@ -183,14 +183,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2017-11-20
+          发表于 2018-01-05
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分类于
             
-              <a href="/categories/随笔散文/">随笔散文</a>
+              <a href="/categories/技术分享/">技术分享</a>
 
               
               
@@ -211,9 +211,35 @@
       
 
       
-        <p></p><p>&emsp;&emsp;人生到了这个尴尬的路口，喜闻乐见地开始了多愁善感，即入而立之年，可是状态和心态却完全没有跟上时光的荏苒…工作再一次从“实习生”起步，感觉处处相难，依旧没有多么澎湃的信心，把自己慢慢跌入中年危机的深潭。</p><br><a id="more"></a><p></p>
-<p></p><p>&emsp;&emsp;恐怕心已不再年轻,让我对梦想的渴望止步于此，感觉只有生活的压力和对现状的不满催动着我为之最后一搏！</p><p></p>
-<p></p><p>&emsp;&emsp;兜兜转转，回归如初，身边多了一个如此疼爱的人，不枉之前的蹉跎，拾之我运。亦不能负如此温情的寄托，实属我命。只有在这个充满了不解的社会里继续辗转，尽量坚持我所坚持的一切，希望我身边的人能依旧天真、幸福。</p><br><img src="http://hexo-1255506658.coscd.myqcloud.com/%E6%96%87%E7%AB%A0%E8%B4%B4%E5%9B%BE/pig.jpeg" width="200px" height="200px"><p></p>
+        <p>&emsp;&emsp;Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。</p>
+<p>Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。</p>
+<p>Node.js 的包管理器 npm，是全球最大的开源库生态系统。</p>
+<a id="more"></a>
+<p>关于NodeJS便不再赘述，也有相关的中文文档，开发十分友好， <a href="http://nodejs.cn" target="_blank" rel="noopener">NodeJS官方网站</a> 您可以上官网自行学习。</p>
+<h2 id="NodeJS的下载安装"><a href="#NodeJS的下载安装" class="headerlink" title="NodeJS的下载安装"></a>NodeJS的下载安装</h2><p>去官网下载对应的版本即可，下载好后直接安装，Node自己继承了npm，安装好以后输入如下指令，便可以查看当前安装的版本：</p>
+<pre><code>node -v
+npm -v
+</code></pre><p>npm是nodejs的包管理器，用于node插件管理，但是其服务器在国外，所以下载的速度可能会非常缓慢，推荐修改npm包管理器的registry为淘宝镜像，<a href="https://npm.taobao.org" target="_blank" rel="noopener">淘宝npm镜像</a></p>
+<ol>
+<li><p>临时修改</p>
+<pre><code>npm --registry https://registry.npm.taobao.org install express
+</code></pre></li>
+<li><p>永久修改</p>
+<pre><code>npm config set registry https://registry.npm.taobao.org
+</code></pre></li>
+<li><p>通过cnpm下载</p>
+<pre><code>npm install -g cnpm --registry=https://registry.npm.taobao.org
+</code></pre></li>
+</ol>
+<h2 id="编译调试NodeJS程序"><a href="#编译调试NodeJS程序" class="headerlink" title="编译调试NodeJS程序"></a>编译调试NodeJS程序</h2><p>选择一款你喜欢的编辑器，就可以尝试便携第一个NodeJS程序了，本文推荐 VS Code ，这是一款不错的轻量级编辑器，根据个人的需求和喜好加载插件，提高编码效率，和sublime非常相像，个人比较喜欢他的UI风格，官网即可下载，<a href="https://code.visualstudio.com" target="_blank" rel="noopener">VS Code官网下载</a>，下载安装后，可以在侧边栏扩展处选择自己喜欢的插件，我就不再详细说了，可以在网上搜索一下。本人推荐一个关于VS Code自动保存的设置，还是十分方便的，直接贴上教程的传送门：-<a href="http://blog.csdn.net/westlonly/article/details/78048049" target="_blank" rel="noopener">VS Code高效开发自动保存设置的方法</a></p>
+<p>接下来可以新建一个名为“helloworld.js”的js文件，在里面写入一行喜闻乐见的代码：</p>
+<pre><code>console.log(&quot;Hello World!&quot;);
+</code></pre><p>保存到一个名为HelloWorld（当然可以起任意的名字）的文件夹里，接着打开终端，进入到刚才的文件夹的位置，输入：</p>
+<pre><code>node helloworld.js
+</code></pre><p>你将会看到终端内出现了</p>
+<pre><code>Hello World!
+</code></pre><p>的字样，这样就成功编译并运行了你的第一个NodeJS代码。</p>
+<p>当然前面推荐VS Code也又一个原因，就是它内置了调试NodeJS的环境，您可以直接打开js文件，写完代码后直接点击调试，就会在控制台界面看到相应的输出。</p>
 
       
     </div>
@@ -222,7 +248,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/随笔/"> #随笔 </a>
+            <a href="/tags/mac/"> #mac </a>
+          
+            <a href="/tags/node-js/"> #node.js </a>
           
         </div>
       
@@ -231,11 +259,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/25/MAC下Homebrew的安装及简介/">MAC下Homebrew的安装及简介</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/05/MAC下Git的安装及配置/">MAC下Git的安装及配置</a>
             
           </div>
         </div>
@@ -341,7 +369,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NodeJS的下载安装"><span class="nav-number">1.</span> <span class="nav-text">NodeJS的下载安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译调试NodeJS程序"><span class="nav-number">2.</span> <span class="nav-text">编译调试NodeJS程序</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
