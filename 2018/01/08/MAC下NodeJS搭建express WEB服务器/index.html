@@ -22,7 +22,7 @@
 
 
 
-  <meta name="keywords" content="mac,homebrew," />
+  <meta name="keywords" content="mac,node.js,express,web服务器," />
 
 
 
@@ -55,7 +55,7 @@
 
 
 
-  <title> MAC下Homebrew的安装及简介 // Hunter's site </title>
+  <title> MAC下NodeJS搭建express WEB服务器 // Hunter's site </title>
 </head>
 
 <body>
@@ -175,7 +175,7 @@
           
           
             
-              MAC下Homebrew的安装及简介
+              MAC下NodeJS搭建express WEB服务器
             
           
         </h1>
@@ -183,7 +183,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2017-12-25
+          发表于 2018-01-08
         </span>
 
         
@@ -211,65 +211,84 @@
       
 
       
-        <p>&emsp;&emsp;什么是Homebrew呢？官方给出了非常清楚的解释：Homebrew是一个包管理器，用于在Mac上安装一些OS X没有的UNIX工具（比如著名的wget）。</p>
-<p>&emsp;&emsp;Homebrew将这些工具统统安装到了 /usr/local/Cellar 目录中，并在 /usr/local/bin 中创建符号链接。</p>
+        <p>Express 是一个简洁而灵活的 node.js Web应用框架,也是目前最火、使用率最高的框架，它提供了一系列强大特性帮助你创建各种Web应用。Express不对node.js已有的特性进行二次抽象，只是在它之上扩展了Web应用所需的功能。丰富的HTTP工具以及来自Connect框架的中间件随取随用，创建强健、友好的API变得快速又简单。</p>
 <a id="more"></a>
-<h2 id="Homebrew的官方网站"><a href="#Homebrew的官方网站" class="headerlink" title="Homebrew的官方网站"></a>Homebrew的官方网站</h2><p><a href="http://mxcl.github.com/homebrew/" target="_blank" rel="noopener">http://mxcl.github.com/homebrew/</a></p>
-<h2 id="Homebrew的安装"><a href="#Homebrew的安装" class="headerlink" title="Homebrew的安装"></a>Homebrew的安装</h2><p>Homebrew是基于Ruby的，所以安装过程也是很简单的，只要你的电脑安装了Xcode，就会自带Ruby，把下面的代码粘贴到Terminal中执行即可。</p>
-<pre><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
-</code></pre><p>接着按“Enter”，输入密码，稍等片刻即将安装好Homebrew，安装成功后，会自动创建目录 /usr/local/Cellar 来存放Homebrew安装的程序。 </p>
-<p>这时你就可以直接在命令行状态下面使用 brew 命令了。</p>
-<p>通过 brew install就可以安装软件了,通过 brew search 就可以搜索程序，例如 brew search vim ,就可以搜索名称包括vim的程序,</p>
-<p>通过 brew update 就可以把包信息更新到最新，不过包更新是通过Git命令，所以要先通过 brew install git 命令安装git。</p>
-<pre><code>brew install git
-</code></pre><h2 id="Homebrew的一些命令"><a href="#Homebrew的一些命令" class="headerlink" title="Homebrew的一些命令"></a>Homebrew的一些命令</h2><pre><code>//查看brew的帮助
-brew –help
+<p><a href="http://www.expressjs.com.cn" target="_blank" rel="noopener">express中文官方网站</a>，这个网站从安装到使用，再到中文API都有详细的教程，现在把简单基础的安装教程给他家展示一下。</p>
+<h2 id="express的安装"><a href="#express的安装" class="headerlink" title="express的安装"></a>express的安装</h2><p>首先你要安装node和npm，<a href="https://suprehunter.github.io/2018/01/05/MAC搭建Node.js开发环境/" target="_blank" rel="noopener">传送门：MAC搭建Node.js开发环境</a></p>
+<p>假定你已经安装了 Node.js，接下来为你的应用创建一个目录myapp，然后进入此目录并将其作为当前工作目录。</p>
+<pre><code>cd myapp
+</code></pre><p>通过 npm init 命令为你的应用创建一个 package.json 文件。</p>
+<pre><code>npm init
+</code></pre><p>此命令将要求你输入几个参数，例如此应用的名称和版本。你可以直接按“回车”键接受默认设置即可，接下来安装 Express 并将其保存到依赖列表中：</p>
+<pre><code>npm install express --save
+</code></pre><h2 id="HelloWorld-实例"><a href="#HelloWorld-实例" class="headerlink" title="HelloWorld 实例"></a>HelloWorld 实例</h2><p>接下来，我们一起创建一个基本的简单的 Express 应用。进入 myapp 目录，创建一个名为 app.js 的文件，然后将下列代码复制进去：</p>
+<pre><code>let express = require(&apos;express&apos;);
+let app = express();
 
-//安装软件
-brew install git
+app.get(&apos;/&apos;, function (req, res) {
+    res.send(&apos;Hello World!&apos;);
+});
 
-//卸载软件
-brew uninstall git
+let server = app.listen(3000, function () {
+    let host = server.address().address;
+    let port = server.address().port;
 
-//搜索软件
-brew search git
+    console.log(&apos;Example app listening at http://%s:%s&apos;, host, port);
+});
+</code></pre><p>上面的代码启动一个服务并监听从 3000 端口进入的所有连接请求。他将对所有 (/) URL 或 路由 返回 “Hello World!” 字符串。对于其他所有路径全部返回 404 Not Found。</p>
+<p>通过如下命令启动此应用：</p>
+<pre><code>node app.js
+</code></pre><p>然后在浏览器中打开 <a href="http://localhost:3000/" target="_blank" rel="noopener">http://localhost:3000/</a> 并查看输出结果。</p>
+<h2 id="Express-应用生成器"><a href="#Express-应用生成器" class="headerlink" title="Express 应用生成器"></a>Express 应用生成器</h2><p>通过应用生成器工具 express 可以快速创建一个应用的骨架。</p>
+<p>通过如下命令安装：</p>
+<pre><code>npm install express-generator -g
+</code></pre><p>在当前工作目录下创建一个命名为 myapp 的应用:</p>
+<pre><code>express myapp
+</code></pre><p>您会看到控制台输出如下信息：</p>
+<pre><code>create : myapp
+create : myapp/package.json
+create : myapp/app.js
+create : myapp/public
+create : myapp/public/javascripts
+create : myapp/public/images
+create : myapp/routes
+create : myapp/routes/index.js
+create : myapp/routes/users.js
+create : myapp/public/stylesheets
+create : myapp/public/stylesheets/style.css
+create : myapp/views
+create : myapp/views/index.jade
+create : myapp/views/layout.jade
+create : myapp/views/error.jade
+create : myapp/bin
+create : myapp/bin/www
+</code></pre><p>然后安装所有依赖包：</p>
+<pre><code>cd myapp
+npm install
+</code></pre><p>输入如下指令启动这个应用：</p>
+<pre><code>npm start
+</code></pre><p>然后在浏览器中打开 <a href="http://localhost:3000/" target="_blank" rel="noopener">http://localhost:3000/</a> 网址就可以看到这个应用了。<br>通过 Express 应用生成器创建的应用一般都有如下目录结构：</p>
+<pre><code>.
+├── app.js
+├── bin
+│   └── www
+├── package.json
+├── public
+│   ├── images
+│   ├── javascripts
+│   └── stylesheets
+│       └── style.css
+├── routes
+│   ├── index.js
+│   └── users.js
+└── views
+    ├── error.jade
+    ├── index.jade
+    └── layout.jade
 
-//显示已经安装软件列表
-brew list
+7 directories, 9 files
+</code></pre><p>这样，一个基本的express框架就搭建完成了，关于路由和静态页面的相关信息，可以直接登陆中文官方网查阅。</p>
 
-//更新软件，把所有的Formula目录更新，并且会对本机已经安装并有更新的软件用*标明。
-brew update
-
-//更新某具体软件
-brew upgrade git
-
-//查看软件信息
-brew [info | home] [FORMULA...]
-
-//删除程序，和upgrade一样，单个软件删除和所有程序老版删除。
-brew cleanup git 
-brew cleanup
-
-//查看那些已安装的程序需要更新
-brew outdated
-
-
-//其它Homebrew指令:
-brew list   //—列出已安装的软件
-
-brew update   //—更新Homebrew
-
-brew home *   //—用浏览器打开
-
-brew info *   //—显示软件内容信息
-
-brew deps *    //—显示包依赖
-
-brew server *  //—启动web服务器，可以通过浏览器访问
-                 //http://localhost:4567/ 来同网页来管理包
-
-brew -h brew   //—帮助
-</code></pre>
       
     </div>
 
@@ -279,7 +298,11 @@ brew -h brew   //—帮助
           
             <a href="/tags/mac/"> #mac </a>
           
-            <a href="/tags/homebrew/"> #homebrew </a>
+            <a href="/tags/node-js/"> #node.js </a>
+          
+            <a href="/tags/express/"> #express </a>
+          
+            <a href="/tags/web服务器/"> #web服务器 </a>
           
         </div>
       
@@ -288,13 +311,13 @@ brew -h brew   //—帮助
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/25/MAC下配置apache、php、mysql开发环境/">MAC下配置apache、php、mysql开发环境</a>
+              <a href="/2018/01/09/MAC下搭建react-native开发环境/">MAC下搭建react-native开发环境</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/20/时光流逝，不知何时/">时光流逝，不知何时</a>
+              <a href="/2018/01/05/MAC搭建Node.js开发环境/">MAC搭建Node.js开发环境</a>
             
           </div>
         </div>
@@ -400,7 +423,7 @@ brew -h brew   //—帮助
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Homebrew的官方网站"><span class="nav-number">1.</span> <span class="nav-text">Homebrew的官方网站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Homebrew的安装"><span class="nav-number">2.</span> <span class="nav-text">Homebrew的安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Homebrew的一些命令"><span class="nav-number">3.</span> <span class="nav-text">Homebrew的一些命令</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#express的安装"><span class="nav-number">1.</span> <span class="nav-text">express的安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HelloWorld-实例"><span class="nav-number">2.</span> <span class="nav-text">HelloWorld 实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Express-应用生成器"><span class="nav-number">3.</span> <span class="nav-text">Express 应用生成器</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

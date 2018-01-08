@@ -1,0 +1,678 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+    <meta name="description" content="岁月荏苒，难任肆意挥霍..." />
+
+
+
+  <meta name="keywords" content="mac,react,react native," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="http://hexo-1255506658.coscd.myqcloud.com/%E6%96%87%E7%AB%A0%E8%B4%B4%E5%9B%BE/nosmoking.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    analytics: {
+      google: ''
+    },
+    sidebar: 'always'
+  };
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?dab6790967e79f0eed2ba42d60dd3b8c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <title> MAC下搭建react-native开发环境 // Hunter's site </title>
+</head>
+
+<body>
+  
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Hunter's site</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            <i class="menu-item-icon icon-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            <i class="menu-item-icon icon-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html">
+            <i class="menu-item-icon icon-commonweal"></i> <br />
+            公益404
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              MAC下搭建react-native开发环境
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2018-01-09
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/技术分享/">技术分享</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>相信对于前端开发者而言react大家一点都不陌生，react-native也一定是有过一定了解的，这个技术让前端开发者可以用自己喜欢的语法和较低的学习成本，开发ios和android的原生应用，极为方便。</p>
+<a id="more"></a>
+<p>react-native是Facebook公司的产品，Learn Once，Write Anywhere，这也是 <a href="https://reactnative.cn" target="_blank" rel="noopener">react-native官网</a> 对其的概述，react-native开发基于JavaScript，这简直就是前端开发者的福音，而且Facebook还扩展出了一种可以在JaveScript代码中直接书写HTML标签的语法糖——JSX，而且论生态，react-native的社区也是非常活跃的。</p>
+<p>废话不多说了，现在给大家简单说一下在MAC下搭建react-native开发环境的方法</p>
+<h2 id="开发ios环境配置"><a href="#开发ios环境配置" class="headerlink" title="开发ios环境配置"></a>开发ios环境配置</h2><p>首先附上官方文档 <a href="https://reactnative.cn/docs/0.51/getting-started.html" target="_blank" rel="noopener">react-native搭建开发环境</a></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h4><p><a href="https://suprehunter.github.io/2017/12/25/MAC下Homebrew的安装及简介/" target="_blank" rel="noopener">传送门：MAC下Homebrew的安装及简介</a></p>
+<h4 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h4><p><a href="https://suprehunter.github.io/2018/01/05/MAC搭建Node.js开发环境/" target="_blank" rel="noopener">传送门：MAC下Node的安装及简介</a></p>
+<p>安装完node后建议设置npm镜像以加速后面的过程（或使用科学上网工具）。注意：不要使用cnpm！cnpm安装的模块路径比较奇怪，packager不能正常识别！</p>
+<pre><code>npm config set registry https://registry.npm.taobao.org --global
+npm config set disturl https://npm.taobao.org/dist --global
+</code></pre><h4 id="Yarn、React-Native的命令行工具（react-native-cli）"><a href="#Yarn、React-Native的命令行工具（react-native-cli）" class="headerlink" title="Yarn、React Native的命令行工具（react-native-cli）"></a>Yarn、React Native的命令行工具（react-native-cli）</h4><p>Yarn是Facebook提供的替代npm的工具，可以加速node模块的下载。React Native的命令行工具用于执行创建、初始化、更新项目、运行打包服务（packager）等任务。</p>
+<pre><code>npm install -g yarn react-native-cli
+</code></pre><p>安装完yarn后同理也要设置镜像源：</p>
+<pre><code>yarn config set registry https://registry.npm.taobao.org --global
+yarn config set disturl https://npm.taobao.org/dist --global
+</code></pre><p>如果你看到EACCES: permission denied这样的权限报错，那么请参照上文的homebrew译注，修复/usr/local目录的所有权：</p>
+<pre><code>sudo chown -R `whoami` /usr/local
+</code></pre><p>安装完yarn之后就可以用yarn代替npm了，例如用yarn代替npm install命令，用yarn add 某第三方库名代替npm install –save 某第三方库名。</p>
+<h4 id="Xcode"><a href="#Xcode" class="headerlink" title="Xcode"></a>Xcode</h4><p>React Native目前需要Xcode 8.0 或更高版本。</p>
+<p>虽然一般来说命令行工具都是默认安装了，但你最好还是启动Xcode，并在Xcode | Preferences | Locations菜单中检查一下是否装有某个版本的Command Line Tools。Xcode的命令行工具中也包含一些必须的工具，比如git等。</p>
+<p>mac下ios的环境很好配置，至此我们就完成了。</p>
+<h2 id="开发android环境配置"><a href="#开发android环境配置" class="headerlink" title="开发android环境配置"></a>开发android环境配置</h2><p>首先附上官方文档 <a href="https://reactnative.cn/docs/0.51/getting-started.html" target="_blank" rel="noopener">react-native搭建开发环境</a></p>
+<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><h4 id="Homebrew-1"><a href="#Homebrew-1" class="headerlink" title="Homebrew"></a>Homebrew</h4><p><a href="https://suprehunter.github.io/2017/12/25/MAC下Homebrew的安装及简介/" target="_blank" rel="noopener">传送门：MAC下Homebrew的安装及简介</a></p>
+<h4 id="Node-1"><a href="#Node-1" class="headerlink" title="Node"></a>Node</h4><p><a href="http://note.youdao.com/" target="_blank" rel="noopener">传送门：MAC下Node的安装及简介</a></p>
+<p>安装完node后建议设置npm镜像以加速后面的过程（或使用科学上网工具）。注意：不要使用cnpm！cnpm安装的模块路径比较奇怪，packager不能正常识别！</p>
+<pre><code>npm config set registry https://registry.npm.taobao.org --global
+npm config set disturl https://npm.taobao.org/dist --global
+</code></pre><h4 id="Yarn、React-Native的命令行工具（react-native-cli）-1"><a href="#Yarn、React-Native的命令行工具（react-native-cli）-1" class="headerlink" title="Yarn、React Native的命令行工具（react-native-cli）"></a>Yarn、React Native的命令行工具（react-native-cli）</h4><p>Yarn是Facebook提供的替代npm的工具，可以加速node模块的下载。React Native的命令行工具用于执行创建、初始化、更新项目、运行打包服务（packager）等任务。</p>
+<pre><code>npm install -g yarn react-native-cli
+</code></pre><p>安装完yarn后同理也要设置镜像源：</p>
+<pre><code>yarn config set registry https://registry.npm.taobao.org --global
+yarn config set disturl https://npm.taobao.org/dist --global
+</code></pre><p>如果你看到EACCES: permission denied这样的权限报错，那么请参照上文的homebrew译注，修复/usr/local目录的所有权：</p>
+<pre><code>sudo chown -R `whoami` /usr/local
+</code></pre><p>安装完yarn之后就可以用yarn代替npm了，例如用yarn代替npm install命令，用yarn add 某第三方库名代替npm install –save 某第三方库名。</p>
+<h4 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a>Android Studio</h4><p>React Native目前需要Android Studio2.0或更高版本。Android Studio包含了运行和测试React Native应用所需的Android SDK和模拟器。</p>
+<p>Android Studio需要Java Development Kit [JDK] 1.8（暂不支持更高版本）。你可以在命令行中输入 javac -version来查看你当前安装的JDK版本。这里提供一个1.8版本的JDK下载链接：</p>
+<pre><code>链接:https://pan.baidu.com/s/1cptus2  密码:l89w
+</code></pre><p>如果你的电脑之前安装了高版本的JDK，需要卸载高版本的，才能安装1.8，查询JDK版本，在命令行输入：</p>
+<pre><code>javac -version
+</code></pre><p>卸载JDK，在命令行输入：</p>
+<pre><code>sudo rm -rf /Library/Java/JavaVirtualMachines/jdk1.8.0_71.jdk（你的JDK版本） 
+sudo rm -rf /Library/PreferencePanes/JavaControlPanel.prefPane 
+sudo rm -rf /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
+</code></pre><p>由于担心稳定性，再提供一个Android Studio2.0版本的下载链接：</p>
+<pre><code>链接:https://pan.baidu.com/s/1eSxYEI2  密码:r7r2
+</code></pre><p>每次进入Android Studio后都会提示更新程序，千万不要更新，不然会出现错误。想下载新版的Android Studio可以去官方下载，只是下好了就不要再更新就OK了，<a href="http://www.android-studio.org" target="_blank" rel="noopener">Android中文网</a>。</p>
+<p>下载好后就是安装了，除非特别注明，请不要改动安装过程中的选项。</p>
+<p>安装过程中有一些需要改动的选项：</p>
+<ol>
+<li>选择Custom选项，不要选择Standard</li>
+<li>勾选Performance和Android Virtual Device</li>
+<li>记住Android SDK Location，后面配置环境变量需要</li>
+<li>安装完成后，在Android Studio的启动欢迎界面中选择Configure | SDK Manager。</li>
+<li>在SDK Platforms窗口中，选择Show Package Details，然后在Android 6.0 (Marshmallow)中勾选Google APIs、Android SDK Platform 23、Intel x86 Atom System Image、Intel x86 Atom_64 System Image以及Google APIs Intel x86 Atom_64 System Image。</li>
+<li>在SDK Tools窗口中，选择Show Package Details，然后在Android SDK Build Tools中勾选Android SDK Build-Tools 23.0.1（必须是这个版本）。然后还要勾选最底部的Android Support Repository.</li>
+<li>然后点击OK，下载安装。</li>
+</ol>
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><h4 id="配置JAVA环境变量"><a href="#配置JAVA环境变量" class="headerlink" title="配置JAVA环境变量"></a>配置JAVA环境变量</h4><p>在命令行中输入：</p>
+<pre><code>/usr/libexec/java_home
+</code></pre><p>来定位java在mac中的安装路径，记住该路径，接着在命令行中输入：</p>
+<pre><code>touch ~/.bash_profile
+</code></pre><p>（touch命令是若文件不存在，创建该文件），在命令行中输入：</p>
+<pre><code>open ~/.bash_profile
+</code></pre><p>用编辑器打开.bash_profile文件，复制以下内容到 .bash_profile文件中</p>
+<pre><code>export JAVA_HOME=查找到的java安装路径
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASS_PATH=$JAVA_HOME/lib:$CLASS_PATH
+</code></pre><p>然后保存修改，在命令行中输入：</p>
+<pre><code>source ~/.bash_profile
+</code></pre><p>验证环境变量是否成功：在命令行输入：</p>
+<pre><code>echo $JAVA_HOME
+</code></pre><p>成功打印java的安装路径就说明配置成功了</p>
+<h4 id="配置Android环境变量"><a href="#配置Android环境变量" class="headerlink" title="配置Android环境变量"></a>配置Android环境变量</h4><p>在命令行中输入：</p>
+<pre><code>open ~/.bash_profile
+</code></pre><p>用编辑器打开.bash_profile文件，复制以下内容到 .bash_profile文件中</p>
+<pre><code>export ANDROID_HOME=之前安装Android Studio第三步的Android SDK路径
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+</code></pre><p>然后保存修改，在命令行中输入：</p>
+<pre><code>source ~/.bash_profile
+</code></pre><p>验证环境变量是否成功：在命令行输入：</p>
+<pre><code>adb
+</code></pre><p>验证android sdk环境变量是否设置成功</p>
+<h2 id="安装React-Native"><a href="#安装React-Native" class="headerlink" title="安装React Native"></a>安装React Native</h2><p>在各种环境都安装完成后，就可以进入主题，安装react-native了，在命令行输入：</p>
+<pre><code>npm install -g react-native-cli
+</code></pre><p>安装完成后，输入：</p>
+<pre><code>react-native -h
+</code></pre><p>可以验证react-native是否安装成功，还有一些辅助软件，可以根据官方文档选择是否安装</p>
+<h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h2><p>在命令行输入</p>
+<pre><code>react-native init myProject
+</code></pre><p>即可初始化一个react-native项目，等待工程创建成功并安装好所有依赖以后，就可以使用一个你常用的编辑器打开myProject，来看一下react-native项目结构</p>
+<h2 id="运行项目"><a href="#运行项目" class="headerlink" title="运行项目"></a>运行项目</h2><h3 id="ios项目"><a href="#ios项目" class="headerlink" title="ios项目"></a>ios项目</h3><p>在命令行输入：</p>
+<pre><code>cd myProject
+react-native run-ios
+</code></pre><p>即可运行ios项目</p>
+<h3 id="android项目"><a href="#android项目" class="headerlink" title="android项目"></a>android项目</h3><p>首先打开Android Studio，在工具栏中找到AVD manager的图标，点击打开AVD管理器，创建一个模拟机型。</p>
+<p>确认后可以在“Android virtual devices”中找到创建好的模拟器，启动模拟器，启动成功后，在命令行中输入</p>
+<pre><code>cd myProject
+react-native run-android
+</code></pre><p>即可运行android项目</p>
+<h2 id="修改项目"><a href="#修改项目" class="headerlink" title="修改项目"></a>修改项目</h2><p>使用你喜欢的编辑器打开App.js并随便改上几行</p>
+<p>在iOS模拟器中按下⌘+R就可以刷新APP并看到你的最新修改</p>
+<p>在android模拟器中按下⌘+M，打开开发者菜单，然后选择 Reload JS 就可以看到你的最新修改。</p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mac/"> #mac </a>
+          
+            <a href="/tags/react/"> #react </a>
+          
+            <a href="/tags/react-native/"> #react native </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/08/MAC下NodeJS搭建express WEB服务器/">MAC下NodeJS搭建express WEB服务器</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+
+    
+      <div class="comments" id="comments">
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="http://hexo-1255506658.coscd.myqcloud.com/%E6%96%87%E7%AB%A0%E8%B4%B4%E5%9B%BE/ye-mini.jpeg" alt="Hunter(胡程俊)" />
+          <p class="site-author-name">Hunter(胡程俊)</p>
+        </div>
+        <p class="site-description motion-element">岁月荏苒，难任肆意挥霍...</p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/SupreHunter" target="_blank">GitHub</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发ios环境配置"><span class="nav-number">1.</span> <span class="nav-text">开发ios环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Homebrew"><span class="nav-number">1.1.1.</span> <span class="nav-text">Homebrew</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Node"><span class="nav-number">1.1.2.</span> <span class="nav-text">Node</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Yarn、React-Native的命令行工具（react-native-cli）"><span class="nav-number">1.1.3.</span> <span class="nav-text">Yarn、React Native的命令行工具（react-native-cli）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Xcode"><span class="nav-number">1.1.4.</span> <span class="nav-text">Xcode</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发android环境配置"><span class="nav-number">2.</span> <span class="nav-text">开发android环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-1"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Homebrew-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">Homebrew</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Node-1"><span class="nav-number">2.1.2.</span> <span class="nav-text">Node</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Yarn、React-Native的命令行工具（react-native-cli）-1"><span class="nav-number">2.1.3.</span> <span class="nav-text">Yarn、React Native的命令行工具（react-native-cli）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Android-Studio"><span class="nav-number">2.1.4.</span> <span class="nav-text">Android Studio</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置环境变量"><span class="nav-number">2.2.</span> <span class="nav-text">配置环境变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置JAVA环境变量"><span class="nav-number">2.2.1.</span> <span class="nav-text">配置JAVA环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置Android环境变量"><span class="nav-number">2.2.2.</span> <span class="nav-text">配置Android环境变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装React-Native"><span class="nav-number">3.</span> <span class="nav-text">安装React Native</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化项目"><span class="nav-number">4.</span> <span class="nav-text">初始化项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行项目"><span class="nav-number">5.</span> <span class="nav-text">运行项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ios项目"><span class="nav-number">5.1.</span> <span class="nav-text">ios项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#android项目"><span class="nav-number">5.2.</span> <span class="nav-text">android项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改项目"><span class="nav-number">6.</span> <span class="nav-text">修改项目</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2017 - 
+  2018
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Hunter(胡程俊)</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+-->
+
+<div class="theme-info">
+  难逃成长，愿永远热泪盈眶...
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.3" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  
+  
+
+</body>
+</html>
