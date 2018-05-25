@@ -22,7 +22,7 @@
 
 
 
-  <meta name="keywords" content="随笔," />
+  <meta name="keywords" content="二次开发,Civil3D," />
 
 
 
@@ -55,7 +55,7 @@
 
 
 
-  <title> 爱你所爱，行你所行，听从你心，无问西东 // Hunter's site </title>
+  <title> AutoCAD Civil 3D .NET二次开发 —— Hello World // Hunter's site </title>
 </head>
 
 <body>
@@ -175,7 +175,7 @@
           
           
             
-              爱你所爱，行你所行，听从你心，无问西东
+              AutoCAD Civil 3D .NET二次开发 —— Hello World
             
           
         </h1>
@@ -183,14 +183,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2018-01-15
+          发表于 2018-05-24
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分类于
             
-              <a href="/categories/随笔散文/">随笔散文</a>
+              <a href="/categories/技术分享/">技术分享</a>
 
               
               
@@ -211,20 +211,71 @@
       
 
       
-        <p>&emsp;&emsp;看了《无问西东》，内心涟漪，很多感触让我觉得一时难以表达，唯借鲁迅先生名言以抒：我们从古以来，就有埋头苦干的人，有拼命硬干的人，有为民请命的人，有舍身求法的人，…虽是等于为帝王将相作家谱的所谓“正史”，也往往掩不住他们的光耀，这就是中国的脊梁。</p><br><a id="more"></a><br><p>&emsp;&emsp;“中华文明是什么？你又是什么？你要为中华文明做什么？”泰戈尔在清华的演讲发人深思，让很多彷徨于当下之才者，不再迷惑，无私无畏。</p>
+        <p>AutoCAD Civil3D作为众多BIM软件中的一员，主要面向土木工程设计及图形文档编制，提供了三种API，分别是：.NET API，COM API和CustomXXX API（使用C++语言），本教程主要基于.NET API给大家介绍C3D二次开发的环境搭建和基础知识，引导大家完成一个Hello World小插件的编写。在平时的工作中，我们经常会遇到很多重复的操作，以及使用软件现有的基本功能无法高效率地解决一些问题，因此需要通过二次开发将这些简单重复的工作交由计算机完成</p>
+<a id="more"></a>
+<h2 id="C3D二次开发所需条件"><a href="#C3D二次开发所需条件" class="headerlink" title="C3D二次开发所需条件"></a>C3D二次开发所需条件</h2><p>首先，你必须熟悉C3D的软件应用，因为二次开发基于C3D的基本功能，只有熟悉了C3D本身的功能操作，才能知道通过二次开发能达到什么高度，也可以避免开发出已经现有的功能模块，浪费人力时间</p>
+<p>其次，你需要掌握一门计算机语言，本例采用C#语言，对语言的掌握不做太深的要求，基础语法和应用掌握即可，可以在网上搜索相应的教程，多家理解联系，很快便可以掌握基础的语法</p>
+<h2 id="开发环境的配置"><a href="#开发环境的配置" class="headerlink" title="开发环境的配置"></a>开发环境的配置</h2><h3 id="编译环境"><a href="#编译环境" class="headerlink" title="编译环境"></a>编译环境</h3><p>本例使用的软件为：Civil3D 2017版本，其对应的.NET版本为4.6，所以推荐安装Visual Studio 2015。（推荐一个反编译软件.NETReflector，十分好用）</p>
+<h3 id="NET项目设置"><a href="#NET项目设置" class="headerlink" title=".NET项目设置"></a>.NET项目设置</h3><p>创建.NET解决方案有两种方式：手动创建和通过AutoCAD .NET向导创建，推荐使用手动创建，这样对各类配置和文件能有自己的理解</p>
+<h4 id="手动创建解决方案及项目"><a href="#手动创建解决方案及项目" class="headerlink" title="手动创建解决方案及项目"></a>手动创建解决方案及项目</h4><p>在Visual Studio 2015中创建一个新的类库解决方案，位置放在自己选择的文件夹中，项目名称和解决方案的名称可以统一设置为helloworld</p>
+<p><img src="http://hexo-1255506658.coscd.myqcloud.com/%E6%96%87%E7%AB%A0%E8%B4%B4%E5%9B%BE/c3d-helloworld-1.png" width="500px" height="350px"></p>
+<p>在解决方案管理器下，右键点击“引用”，选择“添加引用”，在弹出的窗口中点击下方的“浏览”，找到AutoCAD Civil 3D的安装位置，选择基础库文件：acdbmgd.dll,acmgd.dll,accoremgd.dll,AecBaseMgd.dll,AeccDbMgd.dll(有些在C3D的文件夹下，有些在AutoCAD 2017的文件夹下)</p>
+<p>添加Autodesk.AutoCAD.Runtime命名空间，因为后面我们要实现一个接口，这个是该接口定义所在的命名空间</p>
+<pre><code>using Autodesk.AutoCAD.Runtime;
+</code></pre><p>在类中实现IExtensionApplication接口，VS会自动提供实现接口代码完成的选项</p>
+<p><img src="http://hexo-1255506658.coscd.myqcloud.com/%E6%96%87%E7%AB%A0%E8%B4%B4%E5%9B%BE/c3d-helloworld-2.png" width="500px" height="350px"></p>
+<p>注释掉这些方法的默认内容，否则会因为异常而无法正常加载</p>
+<p>完成后代码应该如下：</p>
+<pre><code>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Autodesk.AutoCAD.Runtime;
 
-<p>&emsp;&emsp;可什么才是民族性呢？</p>
+namespace helloworld
+{
+    public class Class1 : IExtensionApplication
+    {
+        public void Initialize()
+        {
+            // throw new NotImplementedException();
+        }
 
-<p>&emsp;&emsp;片尾张震的独白：“看到和听到的，经常令你们沮丧，世俗是这样强大，强大到生不出改变它们的念头。可是如果有机会提前了解了你们的人生，知道青春也不过只有这些日子，不知你们是否还会在意的事情，比如占有多少，才更荣耀，拥有什么，才能被爱。”</p>
-
-<p>&emsp;&emsp;“等你们长大，你们因绿芽冒出土地而喜悦，会对出生的朝阳欢呼雀跃，也会给别人善意和温暖，但是却会在赞美别的生命的同时，常常，甚至永远忘了自己的珍贵。愿你在被打击的时，记起你的珍贵，抵抗恶意；愿你在迷茫时，坚信你的珍贵，爱你所爱，行你所行，听从你心，无问西东。”</p>
-
-<p>&emsp;&emsp;如此震撼人心，正如那句“逝者已矣，生者如斯”，让人终于找到内心的真诚与答案，愿我们，对自己之生命有悟，不再随波逐流，不害怕，不辜负，活出自己的珍贵。人性中都有光辉与善良的一面，让我们在如此社会中不要忘记，无需修饰，永远怀念那份光辉的荣耀，因为那是民族百年求索的记忆，永不褪色的传奇。</p>
-
-<p>&emsp;&emsp;情不知所起，“立德立言，无问西东”，坚守原则，勇往直前，无妄青春。</p>
-
-<p><img src="http://hexo-1255506658.coscd.myqcloud.com/%E6%96%87%E7%AB%A0%E8%B4%B4%E5%9B%BE/foreveryoung.jpg" width="400px" height="300px"></p>
-
+        public void Terminate()
+        {
+            // throw new NotImplementedException();
+        }
+    }
+}
+</code></pre><h4 id="利用向导创建解决方案和项目"><a href="#利用向导创建解决方案和项目" class="headerlink" title="利用向导创建解决方案和项目"></a>利用向导创建解决方案和项目</h4><p>给大家分享一个AutoCAD.NET Wizard的百度云下载地址</p>
+<pre><code>链接:https://pan.baidu.com/s/1VPa_FLiWeszuuROGkY_9Aw  密码:6t0q
+</code></pre><p>安装好以后，会在VS新建项目中C#下看到Autodesk的选项，引用库也可以在设置中勾选</p>
+<h3 id="定义命令"><a href="#定义命令" class="headerlink" title="定义命令"></a>定义命令</h3><p>项目设置完成后，需要创建一个公有方法，并为这个方法设置一个CommandMethod属性，以便可以通过C3D的命令行调用该方法。</p>
+<p>添加Autodesk.AutoCAD.ApplicationServices命名空间</p>
+<pre><code>using Autodesk.AutoCAD.ApplicationServices;
+</code></pre><p>在之前的代码中加入如下代码：</p>
+<pre><code>[CommandMethod(&quot;hello&quot;)]
+public void SthToDo()
+{
+    Application.DocumentManager.MdiActiveDocument.Editor.WriteMessage(&quot;Hello World!&quot;);
+}
+</code></pre><p>###编译</p>
+<p>直接点击菜单上的“生成” ———— “生成解决方案”，会在解决方案目录中的的“bin”——“Debug”目录下生成helloworld.dll的文件</p>
+<p>###加载及运行 </p>
+<p>####手动加载程序及运行命令</p>
+<p>在C3D中下方有一个命令行输入框，键入netload，在对话框中浏览到helloworld.dll的位置，加载</p>
+<p>然后在命令行中继续键入相应的命令，调用我们插件的方法，本例的命令为：hello</p>
+<p>####通过工具空间加载并运行</p>
+<p>在C3D的工具空间中，点击“编辑工具箱按钮” —— 在工具箱管理器中，新建根类别，修改名称 —— 新建类别，修改名称 —— 新建工具，并设置属性</p>
+<p><img src="http://hexo-1255506658.coscd.myqcloud.com/%E6%96%87%E7%AB%A0%E8%B4%B4%E5%9B%BE/c3d-helloworld-3.png" width="500px" height="350px"></p>
+<p>双击新建的工具，即可执行程序</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上就是在AutoCAD Civil 3D的命令行中输出“Hello World”，这样一个小样例的编写及加载过程，希望能带大家进入C3D的.NET二次开发的世界。在大家学习二次开发的过程中，帮助文档是十分重要的一环，分为两类：开发者指南和API参考指南。</p>
+<p>开发者指南：通过样例代码及相应解释说明展示了如何利用.NET API编写代码，API参考指南包含了可用对象的完整列表</p>
+<p><a href="http://docs.autodesk.com/CIV3D/2014/ENU/Developers_Guide/index.html" target="_blank" rel="noopener">2014版开发者指南</a></p>
+<p>2017版指南和API：</p>
+<pre><code>链接：https://pan.baidu.com/s/1bgYzhHu98OJJOZEGQ1molA 密码：a8us
+</code></pre>
       
     </div>
 
@@ -232,7 +283,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/随笔/"> #随笔 </a>
+            <a href="/tags/二次开发/"> #二次开发 </a>
+          
+            <a href="/tags/Civil3D/"> #Civil3D </a>
           
         </div>
       
@@ -241,13 +294,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/23/生活不易，梦当前行/">生活不易，不知何时</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/14/ThreeJS（一）：WebGL规范，及一般框架/">ThreeJS（一）：WebGL规范，及一般框架</a>
+              <a href="/2018/05/23/生活不易，梦当前行/">生活不易，不知何时</a>
             
           </div>
         </div>
@@ -353,7 +404,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C3D二次开发所需条件"><span class="nav-number">1.</span> <span class="nav-text">C3D二次开发所需条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发环境的配置"><span class="nav-number">2.</span> <span class="nav-text">开发环境的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译环境"><span class="nav-number">2.1.</span> <span class="nav-text">编译环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NET项目设置"><span class="nav-number">2.2.</span> <span class="nav-text">.NET项目设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#手动创建解决方案及项目"><span class="nav-number">2.2.1.</span> <span class="nav-text">手动创建解决方案及项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用向导创建解决方案和项目"><span class="nav-number">2.2.2.</span> <span class="nav-text">利用向导创建解决方案和项目</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义命令"><span class="nav-number">2.3.</span> <span class="nav-text">定义命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

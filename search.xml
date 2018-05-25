@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[AutoCAD Civil 3D .NET二次开发 —— Hello World]]></title>
+    <url>%2F2018%2F05%2F24%2FAutoCAD%20Civil%203D%20.NET%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94Hello%20World%2F</url>
+    <content type="text"><![CDATA[AutoCAD Civil3D作为众多BIM软件中的一员，主要面向土木工程设计及图形文档编制，提供了三种API，分别是：.NET API，COM API和CustomXXX API（使用C++语言），本教程主要基于.NET API给大家介绍C3D二次开发的环境搭建和基础知识，引导大家完成一个Hello World小插件的编写。在平时的工作中，我们经常会遇到很多重复的操作，以及使用软件现有的基本功能无法高效率地解决一些问题，因此需要通过二次开发将这些简单重复的工作交由计算机完成 C3D二次开发所需条件首先，你必须熟悉C3D的软件应用，因为二次开发基于C3D的基本功能，只有熟悉了C3D本身的功能操作，才能知道通过二次开发能达到什么高度，也可以避免开发出已经现有的功能模块，浪费人力时间 其次，你需要掌握一门计算机语言，本例采用C#语言，对语言的掌握不做太深的要求，基础语法和应用掌握即可，可以在网上搜索相应的教程，多家理解联系，很快便可以掌握基础的语法 开发环境的配置编译环境本例使用的软件为：Civil3D 2017版本，其对应的.NET版本为4.6，所以推荐安装Visual Studio 2015。（推荐一个反编译软件.NETReflector，十分好用） .NET项目设置创建.NET解决方案有两种方式：手动创建和通过AutoCAD .NET向导创建，推荐使用手动创建，这样对各类配置和文件能有自己的理解 手动创建解决方案及项目在Visual Studio 2015中创建一个新的类库解决方案，位置放在自己选择的文件夹中，项目名称和解决方案的名称可以统一设置为helloworld 在解决方案管理器下，右键点击“引用”，选择“添加引用”，在弹出的窗口中点击下方的“浏览”，找到AutoCAD Civil 3D的安装位置，选择基础库文件：acdbmgd.dll,acmgd.dll,accoremgd.dll,AecBaseMgd.dll,AeccDbMgd.dll(有些在C3D的文件夹下，有些在AutoCAD 2017的文件夹下) 添加Autodesk.AutoCAD.Runtime命名空间，因为后面我们要实现一个接口，这个是该接口定义所在的命名空间 using Autodesk.AutoCAD.Runtime; 在类中实现IExtensionApplication接口，VS会自动提供实现接口代码完成的选项 注释掉这些方法的默认内容，否则会因为异常而无法正常加载 完成后代码应该如下： using System; using System.Collections.Generic; using System.Linq; using System.Text; using System.Threading.Tasks; using Autodesk.AutoCAD.Runtime; namespace helloworld { public class Class1 : IExtensionApplication { public void Initialize() { // throw new NotImplementedException(); } public void Terminate() { // throw new NotImplementedException(); } } } 利用向导创建解决方案和项目给大家分享一个AutoCAD.NET Wizard的百度云下载地址 链接:https://pan.baidu.com/s/1VPa_FLiWeszuuROGkY_9Aw 密码:6t0q 安装好以后，会在VS新建项目中C#下看到Autodesk的选项，引用库也可以在设置中勾选 定义命令项目设置完成后，需要创建一个公有方法，并为这个方法设置一个CommandMethod属性，以便可以通过C3D的命令行调用该方法。 添加Autodesk.AutoCAD.ApplicationServices命名空间 using Autodesk.AutoCAD.ApplicationServices; 在之前的代码中加入如下代码： [CommandMethod(&quot;hello&quot;)] public void SthToDo() { Application.DocumentManager.MdiActiveDocument.Editor.WriteMessage(&quot;Hello World!&quot;); } ###编译 直接点击菜单上的“生成” ———— “生成解决方案”，会在解决方案目录中的的“bin”——“Debug”目录下生成helloworld.dll的文件 ###加载及运行 ####手动加载程序及运行命令 在C3D中下方有一个命令行输入框，键入netload，在对话框中浏览到helloworld.dll的位置，加载 然后在命令行中继续键入相应的命令，调用我们插件的方法，本例的命令为：hello ####通过工具空间加载并运行 在C3D的工具空间中，点击“编辑工具箱按钮” —— 在工具箱管理器中，新建根类别，修改名称 —— 新建类别，修改名称 —— 新建工具，并设置属性 双击新建的工具，即可执行程序 总结以上就是在AutoCAD Civil 3D的命令行中输出“Hello World”，这样一个小样例的编写及加载过程，希望能带大家进入C3D的.NET二次开发的世界。在大家学习二次开发的过程中，帮助文档是十分重要的一环，分为两类：开发者指南和API参考指南。 开发者指南：通过样例代码及相应解释说明展示了如何利用.NET API编写代码，API参考指南包含了可用对象的完整列表 2014版开发者指南 2017版指南和API： 链接：https://pan.baidu.com/s/1bgYzhHu98OJJOZEGQ1molA 密码：a8us]]></content>
+      <categories>
+        <category>技术分享</category>
+      </categories>
+      <tags>
+        <tag>二次开发</tag>
+        <tag>Civil3D</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[生活不易，不知何时]]></title>
     <url>%2F2018%2F05%2F23%2F%E7%94%9F%E6%B4%BB%E4%B8%8D%E6%98%93%EF%BC%8C%E6%A2%A6%E5%BD%93%E5%89%8D%E8%A1%8C%2F</url>
     <content type="text"><![CDATA[&emsp;&emsp;漫步西子湖畔，清风微抚，鸟语潺潺，历史文化之谦谦底蕴盘桓以感叹。如此安逸闲适的美景，却难掩当下的悲哀，尤其使人。无奈于四眼古井作诗一首，致已将失去的思想和自由，愿自由幸福之风吹满中华大地，不曾散去…&emsp;&emsp;生花绮，云端栖，&emsp;&emsp;活色生香万物灵。&emsp;&emsp;不如意，生此地，&emsp;&emsp;易水远去心清明。&emsp;&emsp;梦灿烂，西子畔，&emsp;&emsp;当逐星辰随遇安。&emsp;&emsp;前水潺，后倚栏，&emsp;&emsp;行路坎坷自由淡。]]></content>
