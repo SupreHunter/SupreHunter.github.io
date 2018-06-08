@@ -22,7 +22,7 @@
 
 
 
-  <meta name="keywords" content="随笔," />
+  <meta name="keywords" content="二次开发,microstation,addins," />
 
 
 
@@ -55,7 +55,7 @@
 
 
 
-  <title> 生活不易，不知何时 // Hunter's site </title>
+  <title> MicroStation CE Addins开发（一） // Hunter's site </title>
 </head>
 
 <body>
@@ -175,7 +175,7 @@
           
           
             
-              生活不易，不知何时
+              MicroStation CE Addins开发（一）
             
           
         </h1>
@@ -183,14 +183,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2018-05-23
+          发表于 2018-06-08
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分类于
             
-              <a href="/categories/随笔散文/">随笔散文</a>
+              <a href="/categories/技术分享/">技术分享</a>
 
               
               
@@ -211,10 +211,63 @@
       
 
       
-        <p>&emsp;&emsp;漫步西子湖畔，清风微抚，鸟语潺潺，历史文化之谦谦底蕴盘桓以感叹。如此安逸闲适的美景，却难掩当下的悲哀，尤其使人。无奈于四眼古井作诗一首，致已将失去的思想和自由，愿自由幸福之风吹满中华大地，不曾散去…</p><br><a id="more"></a><br><p>&emsp;&emsp;生花绮，云端栖，</p><br><p>&emsp;&emsp;活色生香万物灵。</p><br><p>&emsp;&emsp;不如意，生此地，</p><br><p>&emsp;&emsp;易水远去心清明。</p><br><p>&emsp;&emsp;梦灿烂，西子畔，</p><br><p>&emsp;&emsp;当逐星辰随遇安。</p><br><p>&emsp;&emsp;前水潺，后倚栏，</p><br><p>&emsp;&emsp;行路坎坷自由淡。</p>
+        <p>MicroStation是Bentley三维建模、文档制作及可视化软件的基础平台，且CE版本为适配windows64位操作系统平台的新版本，无论从软件应用到二次开发都新增了很多新特性。MSCE本身具有很强大的功能，但是往往在不同专业的生产环境中，该软件并不一定具备我们所需要的功能模块及使用习惯，那么Bentley提供了相应的SDK和开发接口，能够让我们在其强大的底层驱动下，发挥所长，开发出我们真切需求的功能，更加有效率地开展我们的工作。该文章是我在Bentley BDN社区及中国开发优先社区学习的一些心得总结，希望能帮助一些刚入门地朋友，了解MicroStation CE Addins相关开发。<br><a id="more"></a></p>
+<h2 id="Addins开发所需条件"><a href="#Addins开发所需条件" class="headerlink" title="Addins开发所需条件"></a>Addins开发所需条件</h2><p>不管在什么平台上进行二次开发，都需要对该平台有一些了解，对相关软件的应用具备一定水平。Addins的开发基于Microsoft的.net平台，通过C#语言编码实现，所以您对于C#语言及C#的编译环境都需要有一定基础，网上有大量相关的学习资料。关于MSCE二次开发的内容，在BDN社区和开发优先社区都有大量的学习内容，建议多上网搜搜资料，有助于您的学习哦。</p>
+<h2 id="开发环境的配置"><a href="#开发环境的配置" class="headerlink" title="开发环境的配置"></a>开发环境的配置</h2><p>需要您安装MicorStation CE版本的软件，更新版本比较多，请自行选择一个您试用的版本下载；建议安装VisualStudio 2015，我们需要在这个集成环境上面进行编译调试。</p>
+<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><p>现在我们带您开始建议一个最简单的应用程序，在MSCE中装载运行。</p>
+<h3 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h3><p>启动VS2015，新建项目，窗体左侧选择C#，右侧选中类库，将.NET Frameworkshe设置为4.6.1，选择好路径和名称，点击OK创建项目。项目创建成功，左侧为C#代码，右侧是解决方案资源管理器窗体。右键解决方案资源管理器中的解决方案，选择属性，在生成（Bulid）选项卡下，修改output path，把它指向您的MSCE安装目录下的mdlapps文件夹，如果是默认安装，路径应该如下：</p>
+<pre><code>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\
+</code></pre><p>这样，在生成解决方案的时候，就会自动在该文件夹下生成dll类库文件了。</p>
+<h3 id="添加引用"><a href="#添加引用" class="headerlink" title="添加引用"></a>添加引用</h3><p>给解决方案添加引用，加载我们在今后的开发过程中使用比较频繁的.NET类库（注：.NET类库是按需加载）。右键点击解决方案资源管理器中的引用，选择添加应用。首先在程序集——框架中找到System.Windows.Forms库，添加；再点击“浏览”按钮，分别浏览如下的路径，来加载dll库文件。</p>
+<pre><code>\MicroStation\Bentley.DgnDisplayNet.dll
+\MicroStation\Bentley.DgnPlatformNET.dll
+\MicroStation\Assemblies\ECFramework\Bentley.EC.Persistence3.dll
+\MicroStation\Assemblies\ECFramework\Bentley.ECObjects.Interop3.dll
+\MicroStation\Assemblies\ECFramework\Bentley.ECObjects3.dll
+\MicroStation\Assemblies\ECFramework\Bentley.ECSystem3.dll
+\MicroStation\Assemblies\ECFramework\Bentley.General.1.0.dll
+\MicroStation\Bentley.GeometryNET.dll
+\MicroStation\Bentley.GeometryNET.Common.dll
+\MicroStation\Bentley.GeometryNET.Structs.dll
+\MicroStation\Assemblies\Bentley.Interop.MicroStationDGN.dll
+\MicroStation\Assemblies\Bentley.MicroStation.dll
+\MicroStation\Assemblies\Bentley.MicroStation.Interfaces.1.0.dll
+\MicroStation\Assemblies\Bentley.MicroStation.Ribbon.dll
+\MicroStation\Assemblies\Bentley.MicroStation.WPF.dll
+\MicroStation\Assemblies\ECFramework\Bentley.Platform.dll
+\MicroStation\Assemblies\ECFramework\Bentley.UI.dll
+\MicroStation\Assemblies\ECFramework\Bentley.Windowing.dll
+\MicroStation\ustation.dll
+</code></pre><h3 id="编写代码"><a href="#编写代码" class="headerlink" title="编写代码"></a>编写代码</h3><p>将Class.cs的类名改一下，Myaddin.cs，并将代码写改成如下：</p>
+<pre><code>using Bentley.MstnPlatformNET;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
-<p><img src="http://hexo-1255506658.coscd.myqcloud.com/%E6%96%87%E7%AB%A0%E8%B4%B4%E5%9B%BE/IMG_20180416_004753.jpg" width="400px" height="300px"></p>
-<p><img src="http://hexo-1255506658.coscd.myqcloud.com/%E6%96%87%E7%AB%A0%E8%B4%B4%E5%9B%BE/IMG_20180419_100212.jpg" width="300px" height="350px"></p>
+namespace helloworld
+{
+    internal sealed class MyAddin : AddIn
+    {
+        public static MyAddin Addin = null;
+
+        private MyAddin(System.IntPtr mdlDesc) : base(mdlDesc)
+        {
+            Addin = this;
+        }
+
+        protected override int Run(string[] commandLine)
+        {
+            MessageBox.Show(&quot;Hello World!&quot;);
+            return 0;
+        }
+    }
+}
+</code></pre><p>要使一个.NET程序集能够在MSCE中加载并作为Addin调用，需要满足如下三个条件：1.包含有一个派生于Bentley.MstnPlatformNET.Addin的类；2.该派生类必须提供一个单参数(IntPtr类型的MDL描述符)的构造函数，且该构造函数需要链接到基类构造函数上；3.该派生类必须覆盖Addin基类中的虚方法Run()</p>
+<h3 id="加载运行"><a href="#加载运行" class="headerlink" title="加载运行"></a>加载运行</h3><p>选择菜单栏“生成——生成解决方案”，创建后缀为.dll的应用程序，如果这个地方报错，提示没有权限访问目录的话。可以尝试把之前的生成路径改回来，改为bin\Debug，然后将生成的dll程序拖入Mdlapps文件夹中。启动MSCE，点击key-in按钮，打开窗口，在键入域中输入MDL LOAD helloworld并回车，此时应该弹出一个写着“Hello World！”的对话框。</p>
+<p>至此，这个简单的Addin程序就编写完了，接下来我们就要继续深入研究MSCE上的二次开发了。</p>
 
       
     </div>
@@ -223,7 +276,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/随笔/"> #随笔 </a>
+            <a href="/tags/二次开发/"> #二次开发 </a>
+          
+            <a href="/tags/microstation/"> #microstation </a>
+          
+            <a href="/tags/addins/"> #addins </a>
           
         </div>
       
@@ -232,13 +289,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/24/AutoCAD Civil 3D .NET二次开发——Hello World/">AutoCAD Civil 3D .NET二次开发 —— Hello World</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/15/爱你所爱，行你所行，听从你心，无问西东/">爱你所爱，行你所行，听从你心，无问西东</a>
+              <a href="/2018/05/24/AutoCAD Civil 3D .NET二次开发——Hello World/">AutoCAD Civil 3D .NET二次开发 —— Hello World</a>
             
           </div>
         </div>
@@ -344,7 +399,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Addins开发所需条件"><span class="nav-number">1.</span> <span class="nav-text">Addins开发所需条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发环境的配置"><span class="nav-number">2.</span> <span class="nav-text">开发环境的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-World"><span class="nav-number">3.</span> <span class="nav-text">Hello World</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建项目"><span class="nav-number">3.1.</span> <span class="nav-text">新建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加引用"><span class="nav-number">3.2.</span> <span class="nav-text">添加引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写代码"><span class="nav-number">3.3.</span> <span class="nav-text">编写代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载运行"><span class="nav-number">3.4.</span> <span class="nav-text">加载运行</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
