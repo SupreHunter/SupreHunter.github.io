@@ -214,7 +214,7 @@
         <p>MicroStation是Bentley三维建模、文档制作及可视化软件的基础平台，且CE版本为适配windows64位操作系统平台的新版本，无论从软件应用到二次开发都新增了很多新特性。MSCE本身具有很强大的功能，但是往往在不同专业的生产环境中，该软件并不一定具备我们所需要的功能模块及使用习惯，那么Bentley提供了相应的SDK和开发接口，能够让我们在其强大的底层驱动下，发挥所长，开发出我们真切需求的功能，更加有效率地开展我们的工作。该文章是我在Bentley BDN社区及中国开发优先社区学习的一些心得总结，希望能帮助一些刚入门地朋友，了解MicroStation CE Addins相关开发。<br><a id="more"></a></p>
 <h2 id="Addins开发所需条件"><a href="#Addins开发所需条件" class="headerlink" title="Addins开发所需条件"></a>Addins开发所需条件</h2><p>不管在什么平台上进行二次开发，都需要对该平台有一些了解，对相关软件的应用具备一定水平。Addins的开发基于Microsoft的.net平台，通过C#语言编码实现，所以您对于C#语言及C#的编译环境都需要有一定基础，网上有大量相关的学习资料。关于MSCE二次开发的内容，在BDN社区和开发优先社区都有大量的学习内容，建议多上网搜搜资料，有助于您的学习哦。</p>
 <h2 id="开发环境的配置"><a href="#开发环境的配置" class="headerlink" title="开发环境的配置"></a>开发环境的配置</h2><p>需要您安装MicorStation CE版本的软件，更新版本比较多，请自行选择一个您试用的版本下载；建议安装VisualStudio 2015，我们需要在这个集成环境上面进行编译调试。</p>
-<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><p>现在我们带您开始建议一个最简单的应用程序，在MSCE中装载运行。</p>
+<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><p>现在我们带您开始建立一个最简单的应用程序，在MSCE中装载运行。</p>
 <h3 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h3><p>启动VS2015，新建项目，窗体左侧选择C#，右侧选中类库，将.NET Frameworkshe设置为4.6.1，选择好路径和名称，点击OK创建项目。项目创建成功，左侧为C#代码，右侧是解决方案资源管理器窗体。右键解决方案资源管理器中的解决方案，选择属性，在生成（Bulid）选项卡下，修改output path，把它指向您的MSCE安装目录下的mdlapps文件夹，如果是默认安装，路径应该如下：</p>
 <pre><code>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\
 </code></pre><p>这样，在生成解决方案的时候，就会自动在该文件夹下生成dll类库文件了。</p>
@@ -289,6 +289,8 @@ namespace helloworld
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/06/08/MicroStation CE MDL开发（一）/">MicroStation CE MDL开发（一）</a>
+            
           </div>
 
           <div class="post-nav-next post-nav-item">
@@ -355,7 +357,7 @@ namespace helloworld
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

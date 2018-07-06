@@ -22,7 +22,7 @@
 
 
 
-  <meta name="keywords" content="随笔," />
+  <meta name="keywords" content="二次开发,microstation,addins," />
 
 
 
@@ -55,7 +55,7 @@
 
 
 
-  <title> 生活不易，不知何时 // Hunter's site </title>
+  <title> MicroStation CE MDL开发（一） // Hunter's site </title>
 </head>
 
 <body>
@@ -175,7 +175,7 @@
           
           
             
-              生活不易，不知何时
+              MicroStation CE MDL开发（一）
             
           
         </h1>
@@ -183,14 +183,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2018-05-23
+          发表于 2018-06-08
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分类于
             
-              <a href="/categories/随笔散文/">随笔散文</a>
+              <a href="/categories/技术分享/">技术分享</a>
 
               
               
@@ -211,10 +211,118 @@
       
 
       
-        <p>&emsp;&emsp;漫步西子湖畔，清风微抚，鸟语潺潺，历史文化之谦谦底蕴盘桓以感叹。如此安逸闲适的美景，却难掩当下的悲哀，尤其使人。无奈于四眼古井作诗一首，致已将失去的思想和自由，愿自由幸福之风吹满中华大地，不曾散去…</p><br><a id="more"></a><br><p>&emsp;&emsp;生花绮，云端栖，</p><br><p>&emsp;&emsp;活色生香万物灵。</p><br><p>&emsp;&emsp;不如意，生此地，</p><br><p>&emsp;&emsp;易水远去心清明。</p><br><p>&emsp;&emsp;梦灿烂，西子畔，</p><br><p>&emsp;&emsp;当逐星辰随遇安。</p><br><p>&emsp;&emsp;前水潺，后倚栏，</p><br><p>&emsp;&emsp;行路坎坷自由淡。</p>
+        <p>MicroStation是Bentley三维建模、文档制作及可视化软件的基础平台，且CE版本为适配windows64位操作系统平台的新版本，无论从软件应用到二次开发都新增了很多新特性。MSCE本身具有很强大的功能，但是往往在不同专业的生产环境中，该软件并不一定具备我们所需要的功能模块及使用习惯，那么Bentley提供了相应的SDK和开发接口，能够让我们在其强大的底层驱动下，发挥所长，开发出我们真切需求的功能，更加有效率地开展我们的工作。该文章是我在Bentley BDN社区及中国开发优先社区学习的一些心得总结，希望能帮助一些刚入门地朋友，了解MicroStation CE MDL相关开发<br><a id="more"></a></p>
+<h2 id="Addins开发所需条件"><a href="#Addins开发所需条件" class="headerlink" title="Addins开发所需条件"></a>Addins开发所需条件</h2><p>不管在什么平台上进行二次开发，都需要对该平台有一些了解，对相关软件的应用具备一定水平。最早期的MDL开发手段是Bentley基于C语言自己发明的扩展语言，编译器和链接器均有Bentley提供，最后生成的程序扩展名为.ma，我们把这样的开发方法成为PureMDL。而如今的MDL已经演变为完全基于C++来开发，同时为了保留MDL的一些特性（如命令表、MDL特有资源等），仍然需要生成一个.ma文件，我们称这种新的MDL为NativeCode MDL。NativeCode MDL能使您采用面向对象的编程方式来写代码，还能使您直接调用任何VC++中可以调用的功能。MDL的开发基于C++语言编码实现，所以您对于C++语言及C++的编译环境都需要有一定基础，网上有大量相关的学习资料。关于MSCE二次开发的内容，在BDN社区和开发优先社区都有大量的学习内容，建议多上网搜搜资料，有助于您的学习哦</p>
+<h2 id="开发环境的配置"><a href="#开发环境的配置" class="headerlink" title="开发环境的配置"></a>开发环境的配置</h2><p>需要您安装MicorStation CE版本的软件，更新版本比较多，请自行选择一个您试用的版本下载；</p>
+<p>安装对应版本的SDK，该开发工具包中包含了相关开发的文档和编译环境，下面对SDK的组成逐一做个介绍：</p>
+<pre><code>bin文件夹：该文件夹下含有生成最终应用程序所需的执行程序以及启动开发环境的批处理文件；
 
-<p><img src="http://hexo-1255506658.coscd.myqcloud.com/%E6%96%87%E7%AB%A0%E8%B4%B4%E5%9B%BE/IMG_20180416_004753.jpg" width="400px" height="300px"></p>
-<p><img src="http://hexo-1255506658.coscd.myqcloud.com/%E6%96%87%E7%AB%A0%E8%B4%B4%E5%9B%BE/IMG_20180419_100212.jpg" width="300px" height="350px"></p>
+doc文件夹：该文件夹下会有五个开发帮助文档，其中MicroStationApi.chm就是我们要用到的MDL C++帮助文档。其他四个是有关C#开发MSCE的帮助文档；
+
+Documentation文件夹：网页格式的SDK Readme；
+
+examples文件夹：大量的MDL C++或C#样例代码；
+
+include文件夹：C++头文件；
+
+library文件夹：C++库文件；
+
+MigrationTools文件夹：帮助您从V8i代码迁移到CE代码的一些工具；
+
+mki文件夹：制作文件的头文件，为mke文件服务的一些系统文件；
+
+eula.pdf文件：Bentley软件最终yoghurt授权协议；
+
+MicroStationDeveloperShell.bat文件：启动开发环境的批处理文件
+</code></pre><p>建议安装VisualStudio 2015，在安装过程中一定要选择安装VC++，同时还要选择安装Windows 10 SDK组件，我们需要在这个集成环境上面进行编译调试</p>
+<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><p>现在我们带您开始建立一个最简单的应用程序，在MSCE中装载运行</p>
+<h3 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h3><p>启动一个文本编辑器，当然可以选择VS2015的集成环境，在相应位置新建一个helloworld.cpp，该文件中含有程序的入口点函数MdlMain，当应用程序被装载后会从该入口点开始执行。我们在该函数中调用了MDL C API函数mdlDialog_dmsgsPrint用以弹出一个消息框显示“Hello World！”字样，.cpp代码如下：</p>
+<pre><code>#include &lt;Mstn\MdlApi\MdlApi.h&gt;
+
+extern &quot;C&quot; DLLEXPORT void MdlMain (int argc, WCharCP argv[])
+{
+   mdlDialog_dmsgsPrint (L&quot;Hello World&quot;);
+}
+</code></pre><p>在cpp文件的同目录下，新建helloworld.r文件，该文件中定义了DllMdlApp资源，该资源的作用是将MA与指定的DLL文件关联起来，.r代码如下：</p>
+<pre><code>#include &lt;Mstn\MdlApi\rscdefs.r.h&gt;
+#define  DLLAPPID     1
+
+DllMdlApp   DLLAPPID =
+{
+    L&quot;HELLOWORLD&quot;, L&quot;HelloWorld&quot;    // taskid, dllName
+}
+</code></pre><p>继续在同目录下，新建helloworld.mke的文件，该文件是生成项目的控制文件，在项目的生成过程中，bmake读取该文件的内容然后调用相应的编译器和链接器从源文件生成最终的MA和DLL，.mke代码如下：</p>
+<pre><code>PolicyFile = MicroStationPolicy.mki
+DEFAULT_TARGET_PROCESSOR_ARCHITECTURE=x64
+
+appName = helloworld
+
+appObjs = $(o)$(appName)$(oext)
+
+appRscs = $(o)$(appName).rsc
+
+baseDir = $(_MakeFilePath)
+mdlLibs = $(MSMDE)library/
+
+%include mdl.mki
+
+#----------------------------------------------------------------------
+# Create needed output directories if they don&apos;t exist
+#----------------------------------------------------------------------
+always:
+    ~mkdir $(o)
+    ~mkdir $(rscObjects)
+    ~mkdir $(reqdObjs)
+
+#----------------------------------------------------------------------
+# Define macros for files included in our link and resource merge
+#----------------------------------------------------------------------
+DLM_NO_SIGN       = 1
+DLM_OBJECT_DEST      = $(o)
+DLM_NAME       = $(appName)
+DLM_OBJECT_FILES  = $(appObjs)
+DLM_NO_DLS      = 1
+DLM_NO_DEF      = 1
+DLM_NOENTRY      = 1
+DLM_NO_MANIFEST   = 1
+DLM_DEST      = $(mdlapps)
+LINKER_LIBRARIES = $(mdlLibs)bentley.lib \
+               $(mdlLibs)mdlbltin.lib \
+               $(mdlLibs)BentleyGeom.lib \
+                   $(mdlLibs)DgnPlatform.lib
+
+#--------------------------------------------
+#    Create command table and header file
+#--------------------------------------------
+#$(baseDir)$(appName)cmd.h  : $(baseDir)$(appName)cmd.r
+
+#$(o)$(appName)cmd.rsc        : $(baseDir)$(appName)cmd.r
+
+#-----------------------------------------------------------------------
+#       Generate resource files
+#-----------------------------------------------------------------------
+$(o)$(appName).rsc          : $(baseDir)$(appName).r
+
+#----------------------------------------------------------------------
+#    Generate MA
+#----------------------------------------------------------------------
+$(mdlapps)$(appName).ma     : $(appRscs)
+        $(msg)
+        &gt; $(o)make.opt
+        -o$@
+        $(appRscs)
+        &lt;
+        $(RLibCmd) @$(o)make.opt
+        ~time
+
+#-----------------------------------------------------------------------------------------
+#    Builds any necessary CODE modules and link them to DLL
+#-----------------------------------------------------------------------------------------
+$(o)$(appName)$(oext)       : $(baseDir)$(appName).cpp
+
+%include dlmlink.mki
+</code></pre><h3 id="加载运行"><a href="#加载运行" class="headerlink" title="加载运行"></a>加载运行</h3><p>选择菜单栏“生成——生成解决方案”，创建后缀为.dll的应用程序，如果这个地方报错，提示没有权限访问目录的话。可以尝试把之前的生成路径改回来，改为bin\Debug，然后将生成的dll程序拖入Mdlapps文件夹中。启动MSCE，点击key-in按钮，打开窗口，在键入域中输入MDL LOAD helloworld并回车，此时应该弹出一个写着“Hello World！”的对话框。</p>
+<p>至此，这个简单的Addin程序就编写完了，接下来我们就要继续深入研究MSCE上的二次开发了。</p>
 
       
     </div>
@@ -223,7 +331,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/随笔/"> #随笔 </a>
+            <a href="/tags/二次开发/"> #二次开发 </a>
+          
+            <a href="/tags/microstation/"> #microstation </a>
+          
+            <a href="/tags/addins/"> #addins </a>
           
         </div>
       
@@ -232,13 +344,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/24/AutoCAD Civil 3D .NET二次开发——Hello World/">AutoCAD Civil 3D .NET二次开发 —— Hello World</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/15/爱你所爱，行你所行，听从你心，无问西东/">爱你所爱，行你所行，听从你心，无问西东</a>
+              <a href="/2018/06/08/MicroStation CE Addins开发（一）/">MicroStation CE Addins开发（一）</a>
             
           </div>
         </div>
@@ -344,7 +454,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Addins开发所需条件"><span class="nav-number">1.</span> <span class="nav-text">Addins开发所需条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发环境的配置"><span class="nav-number">2.</span> <span class="nav-text">开发环境的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-World"><span class="nav-number">3.</span> <span class="nav-text">Hello World</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建项目"><span class="nav-number">3.1.</span> <span class="nav-text">新建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载运行"><span class="nav-number">3.2.</span> <span class="nav-text">加载运行</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
