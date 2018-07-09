@@ -22,7 +22,7 @@
 
 
 
-  <meta name="keywords" content="二次开发,microstation,addins," />
+  <meta name="keywords" content="二次开发,microstation,mdl," />
 
 
 
@@ -212,7 +212,7 @@
 
       
         <p>MicroStation是Bentley三维建模、文档制作及可视化软件的基础平台，且CE版本为适配windows64位操作系统平台的新版本，无论从软件应用到二次开发都新增了很多新特性。MSCE本身具有很强大的功能，但是往往在不同专业的生产环境中，该软件并不一定具备我们所需要的功能模块及使用习惯，那么Bentley提供了相应的SDK和开发接口，能够让我们在其强大的底层驱动下，发挥所长，开发出我们真切需求的功能，更加有效率地开展我们的工作。该文章是我在Bentley BDN社区及中国开发优先社区学习的一些心得总结，希望能帮助一些刚入门地朋友，了解MicroStation CE MDL相关开发<br><a id="more"></a></p>
-<h2 id="Addins开发所需条件"><a href="#Addins开发所需条件" class="headerlink" title="Addins开发所需条件"></a>Addins开发所需条件</h2><p>不管在什么平台上进行二次开发，都需要对该平台有一些了解，对相关软件的应用具备一定水平。最早期的MDL开发手段是Bentley基于C语言自己发明的扩展语言，编译器和链接器均有Bentley提供，最后生成的程序扩展名为.ma，我们把这样的开发方法成为PureMDL。而如今的MDL已经演变为完全基于C++来开发，同时为了保留MDL的一些特性（如命令表、MDL特有资源等），仍然需要生成一个.ma文件，我们称这种新的MDL为NativeCode MDL。NativeCode MDL能使您采用面向对象的编程方式来写代码，还能使您直接调用任何VC++中可以调用的功能。MDL的开发基于C++语言编码实现，所以您对于C++语言及C++的编译环境都需要有一定基础，网上有大量相关的学习资料。关于MSCE二次开发的内容，在BDN社区和开发优先社区都有大量的学习内容，建议多上网搜搜资料，有助于您的学习哦</p>
+<h2 id="MDL开发所需条件"><a href="#MDL开发所需条件" class="headerlink" title="MDL开发所需条件"></a>MDL开发所需条件</h2><p>不管在什么平台上进行二次开发，都需要对该平台有一些了解，对相关软件的应用具备一定水平。最早期的MDL开发手段是Bentley基于C语言自己发明的扩展语言，编译器和链接器均有Bentley提供，最后生成的程序扩展名为.ma，我们把这样的开发方法成为PureMDL。而如今的MDL已经演变为完全基于C++来开发，同时为了保留MDL的一些特性（如命令表、MDL特有资源等），仍然需要生成一个.ma文件，我们称这种新的MDL为NativeCode MDL。NativeCode MDL能使您采用面向对象的编程方式来写代码，还能使您直接调用任何VC++中可以调用的功能。MDL的开发基于C++语言编码实现，所以您对于C++语言及C++的编译环境都需要有一定基础，网上有大量相关的学习资料。关于MSCE二次开发的内容，在BDN社区和开发优先社区都有大量的学习内容，建议多上网搜搜资料，有助于您的学习哦</p>
 <h2 id="开发环境的配置"><a href="#开发环境的配置" class="headerlink" title="开发环境的配置"></a>开发环境的配置</h2><p>需要您安装MicorStation CE版本的软件，更新版本比较多，请自行选择一个您试用的版本下载；</p>
 <p>安装对应版本的SDK，该开发工具包中包含了相关开发的文档和编译环境，下面对SDK的组成逐一做个介绍：</p>
 <pre><code>bin文件夹：该文件夹下含有生成最终应用程序所需的执行程序以及启动开发环境的批处理文件；
@@ -236,7 +236,7 @@ eula.pdf文件：Bentley软件最终yoghurt授权协议；
 MicroStationDeveloperShell.bat文件：启动开发环境的批处理文件
 </code></pre><p>建议安装VisualStudio 2015，在安装过程中一定要选择安装VC++，同时还要选择安装Windows 10 SDK组件，我们需要在这个集成环境上面进行编译调试</p>
 <h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><p>现在我们带您开始建立一个最简单的应用程序，在MSCE中装载运行</p>
-<h3 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h3><p>启动一个文本编辑器，当然可以选择VS2015的集成环境，在相应位置新建一个helloworld.cpp，该文件中含有程序的入口点函数MdlMain，当应用程序被装载后会从该入口点开始执行。我们在该函数中调用了MDL C API函数mdlDialog_dmsgsPrint用以弹出一个消息框显示“Hello World！”字样，.cpp代码如下：</p>
+<h3 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h3><p>首先在硬盘的相应位置新建一个名为“helloworld”的文件夹，在文件夹内新建一个helloworld.cpp，启动一个文本编辑器，当然可以选择VS2015的集成环境，该文件中含有程序的入口点函数MdlMain，当应用程序被装载后会从该入口点开始执行。我们在该函数中调用了MDL C API函数mdlDialog_dmsgsPrint用以弹出一个消息框显示“Hello World！”字样，.cpp代码如下：</p>
 <pre><code>#include &lt;Mstn\MdlApi\MdlApi.h&gt;
 
 extern &quot;C&quot; DLLEXPORT void MdlMain (int argc, WCharCP argv[])
@@ -321,8 +321,47 @@ $(mdlapps)$(appName).ma     : $(appRscs)
 $(o)$(appName)$(oext)       : $(baseDir)$(appName).cpp
 
 %include dlmlink.mki
-</code></pre><h3 id="加载运行"><a href="#加载运行" class="headerlink" title="加载运行"></a>加载运行</h3><p>选择菜单栏“生成——生成解决方案”，创建后缀为.dll的应用程序，如果这个地方报错，提示没有权限访问目录的话。可以尝试把之前的生成路径改回来，改为bin\Debug，然后将生成的dll程序拖入Mdlapps文件夹中。启动MSCE，点击key-in按钮，打开窗口，在键入域中输入MDL LOAD helloworld并回车，此时应该弹出一个写着“Hello World！”的对话框。</p>
-<p>至此，这个简单的Addin程序就编写完了，接下来我们就要继续深入研究MSCE上的二次开发了。</p>
+</code></pre><h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>确认 helloworld.cpp helloworld.r helloworld.mke 三个文件都放在helloworld文件夹下，打开 MicroStation CONNECT Edition SDK ，键入命令进入该文件夹的路径下，</p>
+<pre><code>CD （该helloworld文件夹的路径）
+</code></pre><p>再次键入命令进行编译</p>
+<pre><code>bmake -a
+</code></pre><p>编译过程需要等待一段时间，在黑窗口中会打印编译的过程，编译成功后会直接在MSTN安装目录下的Mdlapps文件夹中生成相应的dll和ma文件</p>
+<h3 id="加载运行"><a href="#加载运行" class="headerlink" title="加载运行"></a>加载运行</h3><p>启动MSCE，点击key-in按钮，打开窗口，在键入域中输入MDL LOAD helloworld并回车，此时应该在日志栏中打印一行“Hello World”的字样。</p>
+<p>至此，这个简单的MDL程序就编写完了，接下来我们就要继续深入研究MSCE上的二次开发了。</p>
+<h2 id="mke文件详解"><a href="#mke文件详解" class="headerlink" title="mke文件详解"></a>mke文件详解</h2><p>MicroStation的老版本是支持跨平台开发的，所以其开发架构并没有沿用微软的体系而是采用了类似Unix/Linux的开发体系，即利用制作文件来控制整个项目的生成过程。</p>
+<p><img src="http://hexo-1255506658.coscd.myqcloud.com/%E6%96%87%E7%AB%A0%E8%B4%B4%E5%9B%BE/MKEProductionProcess.png" width="800px" height="600px"></p>
+<p>其中带有阴影的块为源代码（头文件、资源文件、类型文件、C++文件）；矩形块为一些执行程序（资源编译器、类型生成器、MDL库打包程序、C++源文件编译器、目标对象链接器等）；其它块为生成的中间文件或最终文件</p>
+<p>MDL程序中的资源分命令表资源、对话框资源、消息资源、类型资源等，它们最终都生成到了ma（ma为MicroStation Application的缩写）这个文件中。这些都是Bentley公司特有的，必须按照规定的语法来写这些资源文件。而MDL中的C++源文件到动态链接库的生成过程和我们普通的C++文件编译和链接过程是相同的，都是调用的微软VS下的编译器cl.exe和链接器link.exe将cpp文件生成obj文件，再进而将obj文件（可能是多个）链接成一个dll文件。这两部分几乎独立的过程都是靠一个mke文件来控制的。</p>
+<p>在制作文件中存在如下6中需要掌握的语法：</p>
+<ol>
+<li>注释：以#号开头的行为注释行，bmake程序出现mke文件时会忽略这些行</li>
+<li>宏定义：如appName = HelloWorld这样的形式。appName被称为宏名称，HelloWorld被称为宏的值</li>
+<li>宏展开：以$(宏名称)形式表达。如果$(appName)$(oext)被展开后就是cpp</li>
+<li>依赖：比如$(o)$(appName).rsc : $(baseDir)$(appName).r这样的形式，前者依赖于后者。当后者发生修改后，前者需要重新生成。否则会忽略这样的行。这样做的目的是为了加快整个项目的生成速度，仅对修改的内容生成目标文件</li>
+<li><p>规则：如</p>
+<pre><code>$(mdlapps)$(appName).ma     : $(appRscs)
+    $(msg)
+    &gt; $(o)make.opt
+    -o$@
+    $(appRscs)
+    &lt;
+    $(RLibCmd) @$(o)make.opt
+    ~time
+</code></pre></li>
+</ol>
+<p>这样的形式。由$(appRscs)生成$(appName).ma时，在所有mki（制作文件的头文件）中没有默认的规则，这里列出了显式的规则。最终调用的是命令$(RLibCmd)将多个rsc文件打包成了一个ma文件。$(RLibCmd)展开后其实就是SDK中bin文件夹下而rlib.exe</p>
+<p>【注】：在依赖下面空了一行而没有直接跟规则的，表示到mki中查找默认规则</p>
+<ol>
+<li>语句：如%include或%ifdef等这样以%开头的。要么执行包含动作，要么执行一些条件分支功能。</li>
+</ol>
+<p>详细的mke文件语法可从SDK帮助文档MicroStationApi.chm的Creating a Makefile and Using the bmake Utility一节中查得。要想更深入地理解mke文件，还需要您读系统的mki文件，这些文件定义了许多系统内置的宏定义和规则</p>
+<ol>
+<li>appName定义项目名称。当你要新建一个项目时，需要复制出一个文件夹，修改各文件名后，在mke文件中将appName这个宏的值修改为你新项目的名称</li>
+<li>每增加一个.cpp文件需要修改appObjs的定义以及增加一行生成obj的行。注意，行尾的反斜杠符号是续行符，该续行符之后一定不能再有空格</li>
+<li>如果调用了其他库中的函数，需要将含有该函数的库文件名添加到LINKER_LIBRARIES宏定义中</li>
+<li>如果引用了其他系统的头文件，需要设置dirToSearch指向新的头文件所在的文件夹，然后包含mki</li>
+<li>根据项目的不同，可能会含有命令表资源文件、对话框资源文件等等，需要将各资源文件都定义到appRscs宏中，类似cpp文件，每增加一个资源源文件.r就要增加一行从.r生成.rsc的定义。在mke中已经定义好了有关命令资源的处理行，只需要取消行首的注释符#号即可</li>
+</ol>
 
       
     </div>
@@ -335,7 +374,7 @@ $(o)$(appName)$(oext)       : $(baseDir)$(appName).cpp
           
             <a href="/tags/microstation/"> #microstation </a>
           
-            <a href="/tags/addins/"> #addins </a>
+            <a href="/tags/mdl/"> #mdl </a>
           
         </div>
       
@@ -344,11 +383,13 @@ $(o)$(appName)$(oext)       : $(baseDir)$(appName).cpp
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/06/08/MicroStation CE Addins开发（一）/">MicroStation CE Addins开发（一）</a>
+            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/08/MicroStation CE Addins开发（一）/">MicroStation CE Addins开发（一）</a>
+              <a href="/2018/05/24/AutoCAD Civil 3D .NET二次开发——Hello World/">AutoCAD Civil 3D .NET二次开发 —— Hello World</a>
             
           </div>
         </div>
@@ -424,7 +465,7 @@ $(o)$(appName)$(oext)       : $(baseDir)$(appName).cpp
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -454,7 +495,7 @@ $(o)$(appName)$(oext)       : $(baseDir)$(appName).cpp
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Addins开发所需条件"><span class="nav-number">1.</span> <span class="nav-text">Addins开发所需条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发环境的配置"><span class="nav-number">2.</span> <span class="nav-text">开发环境的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-World"><span class="nav-number">3.</span> <span class="nav-text">Hello World</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建项目"><span class="nav-number">3.1.</span> <span class="nav-text">新建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载运行"><span class="nav-number">3.2.</span> <span class="nav-text">加载运行</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MDL开发所需条件"><span class="nav-number">1.</span> <span class="nav-text">MDL开发所需条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发环境的配置"><span class="nav-number">2.</span> <span class="nav-text">开发环境的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-World"><span class="nav-number">3.</span> <span class="nav-text">Hello World</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建项目"><span class="nav-number">3.1.</span> <span class="nav-text">新建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译"><span class="nav-number">3.2.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载运行"><span class="nav-number">3.3.</span> <span class="nav-text">加载运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mke文件详解"><span class="nav-number">4.</span> <span class="nav-text">mke文件详解</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
